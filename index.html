@@ -840,59 +840,67 @@ function openModal(fileKey, title, type) {
   const body = document.getElementById('modalBody');
   const folder = type === 'pub' ? 'publications' : 'certificates';
 
-  /* Try loading as PDF via iframe first */
+  /* Show loading spinner */
   body.innerHTML = `
-    <iframe
-      class="modal-frame"
-      id="mf"
-      src="assets/${folder}/${fileKey}.pdf"
-      onload="onFrameLoad(this,'${folder}','${fileKey}')"
-    ></iframe>`;
+    <div style="display:flex;align-items:center;justify-content:center;height:200px;gap:12px;color:var(--text-light);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+      </svg>
+      <span style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:500;">Memuat file...</span>
+    </div>
+    <style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>`;
 
   document.getElementById('certModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  /* Cek file secara berurutan: PDF → JPG → PNG → JPEG → placeholder */
+  const candidates = [
+    { url: `assets/${folder}/${fileKey}.pdf`,  type: 'pdf'   },
+    { url: `assets/${folder}/${fileKey}.jpg`,  type: 'image' },
+    { url: `assets/${folder}/${fileKey}.png`,  type: 'image' },
+    { url: `assets/${folder}/${fileKey}.jpeg`, type: 'image' },
+  ];
+
+  tryNextFile(candidates, 0, folder, fileKey, body);
 }
 
-function onFrameLoad(iframe, folder, fileKey) {
-  /* Detect 404 page loaded inside iframe (same-origin GitHub Pages) */
-  try {
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-    const title = doc.title || '';
-    const body  = doc.body  ? doc.body.innerText : '';
-    if (title.includes('404') || body.includes('404') || body.trim() === '') {
-      tryImageFallback(folder, fileKey);
-    }
-  } catch(e) {
-    /* Cross-origin (e.g. browser PDF viewer) — assume success, do nothing */
+function tryNextFile(candidates, index, folder, fileKey, body) {
+  if (index >= candidates.length) {
+    showPlaceholder(folder, fileKey, body);
+    return;
   }
+
+  const candidate = candidates[index];
+
+  fetch(candidate.url, { method: 'HEAD' })
+    .then(res => {
+      if (res.ok) {
+        /* File ditemukan — tampilkan */
+        if (candidate.type === 'pdf') {
+          body.innerHTML = `<iframe class="modal-frame" src="${candidate.url}"></iframe>`;
+        } else {
+          body.innerHTML = `<img class="modal-img" src="${candidate.url}" alt="Certificate" />`;
+        }
+      } else {
+        /* File tidak ada — coba yang berikutnya */
+        tryNextFile(candidates, index + 1, folder, fileKey, body);
+      }
+    })
+    .catch(() => {
+      /* Network error atau fetch tidak didukung — coba berikutnya */
+      tryNextFile(candidates, index + 1, folder, fileKey, body);
+    });
 }
 
-function tryImageFallback(folder, fileKey) {
-  const attempts = [`assets/${folder}/${fileKey}.jpg`, `assets/${folder}/${fileKey}.png`, `assets/${folder}/${fileKey}.jpeg`];
-  let i = 0;
-  function next() {
-    if (i >= attempts.length) { showPlaceholder(folder, fileKey); return; }
-    const img = new Image();
-    img.onload = () => {
-      document.getElementById('modalBody').innerHTML =
-        `<img class="modal-img" src="${attempts[i]}" alt="Certificate" />`;
-    };
-    img.onerror = () => { i++; next(); };
-    img.src = attempts[i];
-  }
-  next();
-}
-
-function showPlaceholder(folder, fileKey) {
-  document.getElementById('modalBody').innerHTML = `
+function showPlaceholder(folder, fileKey, body) {
+  if (!body) body = document.getElementById('modalBody');
+  body.innerHTML = `
     <div class="modal-placeholder">
       <div class="ph-icon">📁</div>
       <h3>File Belum Diunggah</h3>
       <p>Sertifikat ini belum ada di repositori GitHub.<br>
       Tambahkan file ke folder berikut agar tampil di sini:</p>
-      <code class="ph-code">assets/${folder}/${fileKey}.pdf<br>
-— atau —<br>
-assets/${folder}/${fileKey}.jpg</code>
+      <code class="ph-code">assets/${folder}/${fileKey}.pdf<br>— atau —<br>assets/${folder}/${fileKey}.jpg</code>
       <p style="margin-top:16px;font-size:0.78rem;color:#a0aec0;">
         Lihat panduan lengkap di <strong>README.md</strong>
       </p>
