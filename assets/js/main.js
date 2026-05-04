@@ -20,83 +20,83 @@
 // ----------------------------------------------------------------
 const certificates = [
   // ── INTERNATIONAL ACHIEVEMENTS ──
-  { title: "Gold Medal — IYBC (International Youth Business Competition)", org: "IYBC Organizer", year: 2022, level: "Internasional", category: "Prestasi", file: "Gold Medal IYBC.pdf" },
-  { title: "Silver Medal — Glocolis International Competition", org: "Glocolis", year: 2022, level: "Internasional", category: "Prestasi", file: "Silver Medal Glocolis.pdf" },
-  { title: "Silver Medal — IEI2C Business Plan", org: "IEI2C", year: 2022, level: "Internasional", category: "Prestasi", file: "Silver Medal IEI2C BP.pdf" },
-  { title: "Silver Medal — IEI2C Scientific Paper", org: "IEI2C", year: 2022, level: "Internasional", category: "Prestasi", file: "Silver Medal IEI2C PAPER.pdf" },
-  { title: "Silver Medal — WYIIA (World Youth Invention and Innovation Award)", org: "WYIIA", year: 2022, level: "Internasional", category: "Prestasi", file: "Silver Medal WYIIA.pdf" },
-  { title: "Bronze Medal — YISF (Youth International Science Fair)", org: "YISF", year: 2022, level: "Internasional", category: "Prestasi", file: "Bronze Medal YISF.pdf" },
-  { title: "1st Place — Essay Competition PPIT Chengdu (USTB)", org: "PPI Tiongkok / USTB", year: 2025, level: "Internasional", category: "Prestasi", file: "Juara 1 Esai PPIT Chengdu.jpg" },
-  { title: "Participant — AWMUN III (ASEAN World Model United Nations)", org: "AWMUN", year: 2021, level: "Internasional", category: "Prestasi", file: "AWMUN III.png" },
-  { title: "Member — SINO (Scholars of Indonesia-China Network)", org: "SINO", year: 2025, level: "Internasional", category: "Organisasi", file: "SK Anggota 01-ORG-X-25.pdf" },
-  { title: "Member — EYF (Education Youth Forum)", org: "Education Youth Forum", year: 2021, level: "Internasional", category: "Organisasi", file: "EYF.pdf" },
+  { title: "Gold Medal — IYBC (International Youth Business Competition)", org: "IYBC Organizer", year: 2022, level: "Internasional", category: "Competition", file: "Gold Medal IYBC.pdf" },
+  { title: "Silver Medal — Glocolis International Competition", org: "Glocolis", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal Glocolis.pdf" },
+  { title: "Silver Medal — IEI2C Business Plan", org: "IEI2C", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal IEI2C BP.pdf" },
+  { title: "Silver Medal — IEI2C Scientific Paper", org: "IEI2C", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal IEI2C PAPER.pdf" },
+  { title: "Silver Medal — WYIIA (World Youth Invention and Innovation Award)", org: "WYIIA", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal WYIIA.pdf" },
+  { title: "Bronze Medal — YISF (Youth International Science Fair)", org: "YISF", year: 2022, level: "Internasional", category: "Competition", file: "Bronze Medal YISF.pdf" },
+  { title: "1st Place — Essay Competition PPIT Chengdu (USTB)", org: "PPI Tiongkok / USTB", year: 2025, level: "Internasional", category: "Competition", file: "Juara 1 Esai PPIT Chengdu.jpg" },
+  { title: "Participant — AWMUN III (ASEAN World Model United Nations)", org: "AWMUN", year: 2021, level: "Internasional", category: "Competition", file: "AWMUN III.png" },
+  { title: "Member — SINO (Scholars of Indonesia-China Network)", org: "SINO", year: 2025, level: "Internasional", category: "Organization", file: "SK Anggota 01-ORG-X-25.pdf" },
+  { title: "Member — EYF (Education Youth Forum)", org: "Education Youth Forum", year: 2021, level: "Internasional", category: "Organization", file: "EYF.pdf" },
 
   // ── REGIONAL ASIA ──
-  { title: "Runner Up — SEA U-ICON 2021 (Bank Mandiri Category)", org: "STIE IBS / SEA U-ICON", year: 2021, level: "Regional Asia", category: "Prestasi", file: "Sea U Icon.pdf" },
+  { title: "Runner Up — SEA U-ICON 2021 (Bank Mandiri Category)", org: "STIE IBS / SEA U-ICON", year: 2021, level: "Regional Asia", category: "Competition", file: "Sea U Icon.pdf" },
 
   // ── NATIONAL ACHIEVEMENTS ──
-  { title: "Beswan Djarum — Djarum Beasiswa Plus (Batch 37)", org: "Djarum Foundation", year: 2022, level: "Nasional", category: "Prestasi", file: "Beswan Djarum 37.pdf" },
-  { title: "1st Place — National Poster Competition EPIC (Dies Natalis Elektro)", org: "Jurusan Teknik Elektro UNEJ", year: 2022, level: "Nasional", category: "Prestasi", file: "Juara 1_EPIC.pdf" },
-  { title: "2nd Place — LIDM (Ministry of Education Certificate)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Prestasi", file: "Juara 2_LIDM Kementrian.pdf" },
-  { title: "Funding Recipient — KBMI (Kemendikbud Business Incubator)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Prestasi", file: "Lolos Pendanaan_KBMI.pdf" },
-  { title: "Best Team — BPCPRE (Business Plan Competition in Renewable Energy)", org: "UNDP Indonesia", year: 2022, level: "Nasional", category: "Prestasi", file: "Best Team_BPCPRE.pdf" },
-  { title: "Top 5 — ETIC 2022 (Energy Technology Innovation Competition)", org: "Kementerian ESDM RI", year: 2022, level: "Nasional", category: "Prestasi", file: "Top 5_ETIC.pdf" },
-  { title: "Finalist — NBPC (National Business Plan Competition)", org: "PTN / HMJ", year: 2022, level: "Nasional", category: "Prestasi", file: "Finalis NBPC.pdf" },
-  { title: "Finalist — LKTIN PESC 2021", org: "Himpunan Elektro UM", year: 2021, level: "Nasional", category: "Prestasi", file: "Finalis PESC.pdf" },
-  { title: "Finalist — UNYSEF #10 (UNY Scientific Fair)", org: "UKM Penelitian UNY", year: 2021, level: "Nasional", category: "Prestasi", file: "Finalis UNYSEF.pdf" },
-  { title: "Runner Up — LKTIN IMATETANI", org: "IMATETANI", year: 2022, level: "Nasional", category: "Prestasi", file: "Harapan 1 LKTIN IMATETANI.png" },
-  { title: "2nd Place — Estec III", org: "Estec", year: 2022, level: "Nasional", category: "Prestasi", file: "Juara 2_Estec III.png" },
-  { title: "Finalist — NUSPEST", org: "PTN / Lembaga", year: 2022, level: "Nasional", category: "Prestasi", file: "Finalis NUSPEST.png" },
+  { title: "Beswan Djarum — Djarum Beasiswa Plus (Batch 37)", org: "Djarum Foundation", year: 2022, level: "Nasional", category: "Competition", file: "Beswan Djarum 37.pdf" },
+  { title: "1st Place — National Poster Competition EPIC (Dies Natalis Elektro)", org: "Jurusan Teknik Elektro UNEJ", year: 2022, level: "Nasional", category: "Competition", file: "Juara 1_EPIC.pdf" },
+  { title: "2nd Place — LIDM (Ministry of Education Certificate)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", file: "Juara 2_LIDM Kementrian.pdf" },
+  { title: "Funding Recipient — KBMI (Kemendikbud Business Incubator)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", file: "Lolos Pendanaan_KBMI.pdf" },
+  { title: "Best Team — BPCPRE (Business Plan Competition in Renewable Energy)", org: "UNDP Indonesia", year: 2022, level: "Nasional", category: "Competition", file: "Best Team_BPCPRE.pdf" },
+  { title: "Top 5 — ETIC 2022 (Energy Technology Innovation Competition)", org: "Kementerian ESDM RI", year: 2022, level: "Nasional", category: "Competition", file: "Top 5_ETIC.pdf" },
+  { title: "Finalist — NBPC (National Business Plan Competition)", org: "PTN / HMJ", year: 2022, level: "Nasional", category: "Competition", file: "Finalis NBPC.pdf" },
+  { title: "Finalist — LKTIN PESC 2021", org: "Himpunan Elektro UM", year: 2021, level: "Nasional", category: "Competition", file: "Finalis PESC.pdf" },
+  { title: "Finalist — UNYSEF #10 (UNY Scientific Fair)", org: "UKM Penelitian UNY", year: 2021, level: "Nasional", category: "Competition", file: "Finalis UNYSEF.pdf" },
+  { title: "Runner Up — LKTIN IMATETANI", org: "IMATETANI", year: 2022, level: "Nasional", category: "Competition", file: "Harapan 1 LKTIN IMATETANI.png" },
+  { title: "2nd Place — Estec III", org: "Estec", year: 2022, level: "Nasional", category: "Competition", file: "Juara 2_Estec III.png" },
+  { title: "Finalist — NUSPEST", org: "PTN / Lembaga", year: 2022, level: "Nasional", category: "Competition", file: "Finalis NUSPEST.png" },
 
   // ── NATIONAL PROJECTS ──
-  { title: "Co-Author — Buku Karya Bersama Mahasiswa (Student Book)", org: "LP3M Universitas Jember", year: 2020, level: "Nasional", category: "Project", file: "Buku Karya Mahasiswa_Penulis.pdf" },
-  { title: "Funding Recipient — PPMW (Entrepreneurship Development Program)", org: "Universitas Jember", year: 2022, level: "Nasional", category: "Project", file: "PPMW.pdf" },
-  { title: "Hibah Recipient — PROMAHADESA (Program Mahasiswa Desa)", org: "Universitas Jember", year: 2022, level: "Nasional", category: "Project", file: "PROMAHADESA.pdf" },
+  { title: "Co-Author — Buku Karya Bersama Mahasiswa (Student Book)", org: "LP3M Universitas Jember", year: 2020, level: "Nasional", category: "Credential", file: "Buku Karya Mahasiswa_Penulis.pdf" },
+  { title: "Funding Recipient — PPMW (Entrepreneurship Development Program)", org: "Universitas Jember", year: 2022, level: "Nasional", category: "Credential", file: "PPMW.pdf" },
+  { title: "Hibah Recipient — PROMAHADESA (Program Mahasiswa Desa)", org: "Universitas Jember", year: 2022, level: "Nasional", category: "Credential", file: "PROMAHADESA.pdf" },
 
   // ── UNIVERSITY ACHIEVEMENTS ──
-  { title: "Best Student — Faculty of Engineering 2021 (Pilmapres FT)", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Prestasi", file: "Pilmapres FT 2021.pdf" },
-  { title: "Best Student — Faculty of Engineering 2022 (Pilmapres FT)", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Prestasi", file: "Pilmapres FT 2022.pdf" },
-  { title: "Best Student — University of Jember (Pilmapres UNEJ)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Prestasi", file: "PILMAPRES_Juara.pdf" },
-  { title: "Campus Ambassador Favorite — Duta Kampus UNEJ", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Prestasi", file: "Duta Kampus_Favorit.pdf" },
-  { title: "1st Place — PKM Raya (Karsa Cipta Category)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Prestasi", file: "PKM Raya_1 Poster KC.pdf" },
-  { title: "Participant — PKM Raya Presentation (Karsa Cipta)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Prestasi", file: "PKM Raya_3 Presentasi KC.pdf" },
-  { title: "Participant — Logo Design Competition, Electrical Engineering", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Prestasi", file: "Lomba Logo Jurusan.pdf" },
+  { title: "Best Student — Faculty of Engineering 2021 (Pilmapres FT)", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Competition", file: "Pilmapres FT 2021.pdf" },
+  { title: "Best Student — Faculty of Engineering 2022 (Pilmapres FT)", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "Pilmapres FT 2022.pdf" },
+  { title: "Best Student — University of Jember (Pilmapres UNEJ)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "PILMAPRES_Juara.pdf" },
+  { title: "Campus Ambassador Favorite — Duta Kampus UNEJ", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "Duta Kampus_Favorit.pdf" },
+  { title: "1st Place — PKM Raya (Karsa Cipta Category)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "PKM Raya_1 Poster KC.pdf" },
+  { title: "Participant — PKM Raya Presentation (Karsa Cipta)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "PKM Raya_3 Presentasi KC.pdf" },
+  { title: "Participant — Logo Design Competition, Electrical Engineering", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "Lomba Logo Jurusan.pdf" },
 
   // ── CERTIFICATIONS ──
-  { title: "Data Science with Microsoft Fabric — Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_902_1510859_260226145240.pdf" },
-  { title: "Building Gen AI Applications with Microsoft Azure", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_899_1510859_150326110907.pdf" },
-  { title: "Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_708_1510859_250326114410.pdf" },
-  { title: "Machine Learning for Beginners", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_184_1510859_290326090040.pdf" },
-  { title: "Fundamentals of Artificial Intelligence", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_653_1510859_280326145627.pdf" },
-  { title: "Personal Development Strategy", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_697_1510859_290326191337.pdf" },
-  { title: "Prompt Engineering for Software Developers", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_753_1510859_280326152133.pdf" },
-  { title: "Programming with Python — Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Sertifikasi", file: "sertifikat_course_86_1510859_280326192907.pdf" },
-  { title: "Git & GitHub Fundamentals", org: "Dicoding Indonesia", year: 2022, level: "Nasional", category: "Sertifikasi", file: "Dicoding_Studi Independent.pdf" },
-  { title: "Data Visualization Fundamentals", org: "Dicoding Indonesia", year: 2021, level: "Nasional", category: "Sertifikasi", file: "Dicoding_Dasar Visualisasi Data.pdf" },
-  { title: "Independent Certified Study (SIB) — Front-End & Machine Learning", org: "Dicoding / Kemendikbud", year: 2022, level: "Nasional", category: "Sertifikasi", file: "SIB.pdf" },
-  { title: "Renewable Power and Electricity Systems", org: "Coursera / University of Colorado Boulder", year: 2023, level: "Internasional", category: "Sertifikasi", file: "Coursera KWKAQDY2GEQW.pdf" },
-  { title: "Electrical Power Generation — An Industrial Outlook", org: "Coursera / L&T EduTech", year: 2023, level: "Internasional", category: "Sertifikasi", file: "Coursera Q4V8U4T47QRW.pdf" },
-  { title: "ET3034x: Solar Energy", org: "DelftX / edX (TU Delft)", year: 2023, level: "Internasional", category: "Sertifikasi", file: "DelftX ET3034x Certificate _ edX.pdf" },
-  { title: "Python Fundamentals for Data Science", org: "DQ Lab", year: 2021, level: "Nasional", category: "Sertifikasi", file: "DQ_Fundamental Phyton.pdf" },
-  { title: "Introduction to Data Science with R", org: "DQ Lab", year: 2021, level: "Nasional", category: "Sertifikasi", file: "DQ_Data Science R.pdf" },
-  { title: "R Fundamentals for Data Science", org: "DQ Lab", year: 2021, level: "Nasional", category: "Sertifikasi", file: "DQ_R Fundamental.pdf" },
-  { title: "Fundamental SQL Using SELECT Statement", org: "DQ Lab", year: 2021, level: "Nasional", category: "Sertifikasi", file: "DQ_SQL Fundamental.pdf" },
-  { title: "Machine Learning & Deep Learning (KMMI)", org: "KMMI / Kemendikbud", year: 2022, level: "Nasional", category: "Sertifikasi", file: "KMMI_MLDL.pdf" },
-  { title: "PLC (Programmable Logic Controller) Certification", org: "Lembaga Sertifikasi", year: 2022, level: "Nasional", category: "Sertifikasi", file: "Sertifikasi PLC.pdf" },
-  { title: "Laboratory Assistant — Electrical Engineering", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Sertifikasi", file: "Asisten Lab.pdf" },
+  { title: "Data Science with Microsoft Fabric — Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_902_1510859_260226145240.pdf" },
+  { title: "Building Gen AI Applications with Microsoft Azure", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_899_1510859_150326110907.pdf" },
+  { title: "Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_708_1510859_250326114410.pdf" },
+  { title: "Machine Learning for Beginners", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_184_1510859_290326090040.pdf" },
+  { title: "Fundamentals of Artificial Intelligence", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_653_1510859_280326145627.pdf" },
+  { title: "Personal Development Strategy", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_697_1510859_290326191337.pdf" },
+  { title: "Prompt Engineering for Software Developers", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_753_1510859_280326152133.pdf" },
+  { title: "Programming with Python — Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_86_1510859_280326192907.pdf" },
+  { title: "Git & GitHub Fundamentals", org: "Dicoding Indonesia", year: 2022, level: "Nasional", category: "Credential", file: "Dicoding_Studi Independent.pdf" },
+  { title: "Data Visualization Fundamentals", org: "Dicoding Indonesia", year: 2021, level: "Nasional", category: "Credential", file: "Dicoding_Dasar Visualisasi Data.pdf" },
+  { title: "Independent Certified Study (SIB) — Front-End & Machine Learning", org: "Dicoding / Kemendikbud", year: 2022, level: "Nasional", category: "Credential", file: "SIB.pdf" },
+  { title: "Renewable Power and Electricity Systems", org: "Coursera / University of Colorado Boulder", year: 2023, level: "Internasional", category: "Credential", file: "Coursera KWKAQDY2GEQW.pdf" },
+  { title: "Electrical Power Generation — An Industrial Outlook", org: "Coursera / L&T EduTech", year: 2023, level: "Internasional", category: "Credential", file: "Coursera Q4V8U4T47QRW.pdf" },
+  { title: "ET3034x: Solar Energy", org: "DelftX / edX (TU Delft)", year: 2023, level: "Internasional", category: "Credential", file: "DelftX ET3034x Certificate _ edX.pdf" },
+  { title: "Python Fundamentals for Data Science", org: "DQ Lab", year: 2021, level: "Nasional", category: "Credential", file: "DQ_Fundamental Phyton.pdf" },
+  { title: "Introduction to Data Science with R", org: "DQ Lab", year: 2021, level: "Nasional", category: "Credential", file: "DQ_Data Science R.pdf" },
+  { title: "R Fundamentals for Data Science", org: "DQ Lab", year: 2021, level: "Nasional", category: "Credential", file: "DQ_R Fundamental.pdf" },
+  { title: "Fundamental SQL Using SELECT Statement", org: "DQ Lab", year: 2021, level: "Nasional", category: "Credential", file: "DQ_SQL Fundamental.pdf" },
+  { title: "Machine Learning & Deep Learning (KMMI)", org: "KMMI / Kemendikbud", year: 2022, level: "Nasional", category: "Credential", file: "KMMI_MLDL.pdf" },
+  { title: "PLC (Programmable Logic Controller) Certification", org: "Lembaga Sertifikasi", year: 2022, level: "Nasional", category: "Credential", file: "Sertifikasi PLC.pdf" },
+  { title: "Laboratory Assistant — Electrical Engineering", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Credential", file: "Asisten Lab.pdf" },
 
   // ── INTERNSHIP ──
-  { title: "Internship — PT Lentera Bumi Nusantara (DC-DC Converter Control)", org: "PT Lentera Bumi Nusantara", year: 2022, level: "Nasional", category: "Internship", file: "Kerja Praktik_LBN.pdf" },
+  { title: "Internship — PT Lentera Bumi Nusantara (DC-DC Converter Control)", org: "PT Lentera Bumi Nusantara", year: 2022, level: "Nasional", category: "Organization", file: "Kerja Praktik_LBN.pdf" },
 
   // ── ORGANIZATION ──
-  { title: "Head of UKM Einstein FT UNEJ", org: "UKM Einstein FT UNEJ", year: 2022, level: "Universitas", category: "Organisasi", file: "UKM Einstein.pdf" },
-  { title: "Staff Member — UKM Mustika UNEJ", org: "UKM Mustika UNEJ", year: 2021, level: "Universitas", category: "Organisasi", file: "UKM Mustika.pdf" },
-  { title: "Member — Sahabat Perpustakaan UNEJ", org: "Perpustakaan UNEJ", year: 2021, level: "Universitas", category: "Organisasi", file: "Sahabat Perpustakaan.png" },
-  { title: "Chief Organizer — EGE Event", org: "EGE / UNEJ", year: 2021, level: "Universitas", category: "Organisasi", file: "EGE_Ketupel.pdf" },
-  { title: "Chief Organizer — JLT Event", org: "UNEJ / HMJ", year: 2022, level: "Universitas", category: "Organisasi", file: "JLT_Acara.pdf" },
-  { title: "Coordinator Committee — MET Event", org: "MET / UNEJ", year: 2022, level: "Universitas", category: "Organisasi", file: "MET_Koordinator Commitee.jpg" },
-  { title: "Participant — MTQ (Musabaqah Tilawatil Quran) 2021", org: "LPTQ / Kab. Jember", year: 2021, level: "Kabupaten", category: "Prestasi", file: "MTQ 2021.pdf" },
-  { title: "Participant — MTQ (Musabaqah Tilawatil Quran) 2022", org: "LPTQ / Kab. Jember", year: 2022, level: "Kabupaten", category: "Prestasi", file: "MTQ 2022.pdf" },
+  { title: "Head of UKM Einstein FT UNEJ", org: "UKM Einstein FT UNEJ", year: 2022, level: "Universitas", category: "Organization", file: "UKM Einstein.pdf" },
+  { title: "Staff Member — UKM Mustika UNEJ", org: "UKM Mustika UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "UKM Mustika.pdf" },
+  { title: "Member — Sahabat Perpustakaan UNEJ", org: "Perpustakaan UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "Sahabat Perpustakaan.png" },
+  { title: "Chief Organizer — EGE Event", org: "EGE / UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "EGE_Ketupel.pdf" },
+  { title: "Chief Organizer — JLT Event", org: "UNEJ / HMJ", year: 2022, level: "Universitas", category: "Organization", file: "JLT_Acara.pdf" },
+  { title: "Coordinator Committee — MET Event", org: "MET / UNEJ", year: 2022, level: "Universitas", category: "Organization", file: "MET_Koordinator Commitee.jpg" },
+  { title: "Participant — MTQ (Musabaqah Tilawatil Quran) 2021", org: "LPTQ / Kab. Jember", year: 2021, level: "Kabupaten", category: "Competition", file: "MTQ 2021.pdf" },
+  { title: "Participant — MTQ (Musabaqah Tilawatil Quran) 2022", org: "LPTQ / Kab. Jember", year: 2022, level: "Kabupaten", category: "Competition", file: "MTQ 2022.pdf" },
 ];
 
 // ----------------------------------------------------------------
@@ -173,9 +173,7 @@ function renderCertificates(filter = 'all') {
   const grid = document.getElementById('certGrid');
   const filtered = filter === 'all'
     ? certificates
-    : certificates.filter(c =>
-        c.level === filter || c.category === filter
-      );
+    : certificates.filter(c => c.category === filter);
 
   grid.innerHTML = filtered.map(cert => `
     <div class="cert-card reveal">
