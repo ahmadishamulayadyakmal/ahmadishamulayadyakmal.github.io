@@ -20,46 +20,40 @@
 // ----------------------------------------------------------------
 const certificates = [
   // ── INTERNATIONAL ACHIEVEMENTS ──
-  { title: "Gold Medal — IYBC (International Youth Business Competition)", org: "IYBC Organizer", year: 2022, level: "Internasional", category: "Competition", file: "Gold Medal IYBC.pdf" },
-  { title: "Silver Medal — Glocolis International Competition", org: "Glocolis", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal Glocolis.pdf" },
-  { title: "Silver Medal — IEI2C Business Plan", org: "IEI2C", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal IEI2C BP.pdf" },
-  { title: "Silver Medal — IEI2C Scientific Paper", org: "IEI2C", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal IEI2C PAPER.pdf" },
-  { title: "Silver Medal — WYIIA (World Youth Invention and Innovation Award)", org: "WYIIA", year: 2022, level: "Internasional", category: "Competition", file: "Silver Medal WYIIA.pdf" },
-  { title: "Bronze Medal — YISF (Youth International Science Fair)", org: "YISF", year: 2022, level: "Internasional", category: "Competition", file: "Bronze Medal YISF.pdf" },
-  { title: "1st Place — Essay Competition PPIT Chengdu (USTB)", org: "PPI Tiongkok / USTB", year: 2025, level: "Internasional", category: "Competition", file: "Juara 1 Esai PPIT Chengdu.jpg" },
-  { title: "Participant — AWMUN III (ASEAN World Model United Nations)", org: "AWMUN", year: 2021, level: "Internasional", category: "Competition", file: "AWMUN III.png" },
+  { title: "Gold Medal — IYBC (International Youth Business Competition)", org: "Indonesian Young Scientist Association", year: 2022, level: "Internasional", category: "Competition", label: "Business Plan", file: "Gold Medal IYBC.pdf" },
+  { title: "Silver Medal — Glocolis (Global Competition for Life Science)", org: "Indonesian Young Scientist Association", year: 2022, level: "Internasional", category: "Competition", label: "Research and Innovation", file: "Silver Medal Glocolis.pdf" },
+  { title: "Silver Medal — IEI2C (Indonesia Education International Innovative Competition)", org: "Indonesian Federation Publisher of Research Innovation", year: 2022, level: "Internasional", category: "Competition", label: "Business Plan", file: "Silver Medal IEI2C BP.pdf" },
+  { title: "Silver Medal — IEI2C (Indonesia Education International Innovative Competition) Scientific Paper", org: "Indonesian Federation Publisher of Research Innovation", year: 2022, level: "Internasional", category: "Competition", label: "Research and Innovation", file: "Silver Medal IEI2C PAPER.pdf" },
+  { title: "Silver Medal — WYIIA (World Youth Invention and Innovation Award)", org: "Indonesian Young Scientist Association", year: 2021, level: "Internasional", category: "Competition", label: "Research and Innovation", file: "Silver Medal WYIIA.pdf" },
+  { title: "Bronze Medal — YISF (Youth International Science Fair)", org: "Indonesian Young Scientist Association", year: 2021, level: "Internasional", category: "Competition", file: "Bronze Medal YISF.pdf" },
+  { title: "1st Place — Essay Competition", org: "PPIT Chengdu", year: 2025, level: "Internasional", category: "Competition", label: "Essay Competition", file: "Juara 1 Esai PPIT Chengdu.jpg" },
+  { title: "Participant — AWMUN III (ASEAN World Model United Nations)", org: "International Global Network", year: 2019, level: "Internasional", category: "Competition", label: "Model United Nation", file: "AWMUN III.png" },
   { title: "Member — SINO (Scholars of Indonesia-China Network)", org: "SINO", year: 2025, level: "Internasional", category: "Organization", file: "SK Anggota 01-ORG-X-25.pdf" },
-  { title: "Member — EYF (Education Youth Forum)", org: "Education Youth Forum", year: 2021, level: "Internasional", category: "Organization", file: "EYF.pdf" },
 
   // ── REGIONAL ASIA ──
-  { title: "Runner Up — SEA U-ICON 2021 (Bank Mandiri Category)", org: "STIE IBS / SEA U-ICON", year: 2021, level: "Regional Asia", category: "Competition", file: "Sea U Icon.pdf" },
+  { title: "Runner Up — South East Asia University ICON", org: "Indonesia Banking School", year: 2021, level: "Regional Asia", category: "Competition", label: "Idea Competition", file: "Sea U Icon.pdf" },
 
   // ── NATIONAL ACHIEVEMENTS ──
-  { title: "Beswan Djarum — Djarum Beasiswa Plus (Batch 37)", org: "Djarum Foundation", year: 2022, level: "Nasional", category: "Competition", file: "Beswan Djarum 37.pdf" },
-  { title: "1st Place — National Poster Competition EPIC (Dies Natalis Elektro)", org: "Jurusan Teknik Elektro UNEJ", year: 2022, level: "Nasional", category: "Competition", file: "Juara 1_EPIC.pdf" },
-  { title: "2nd Place — LIDM (Ministry of Education Certificate)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", file: "Juara 2_LIDM Kementrian.pdf" },
-  { title: "Funding Recipient — KBMI (Kemendikbud Business Incubator)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", file: "Lolos Pendanaan_KBMI.pdf" },
-  { title: "Best Team — BPCPRE (Business Plan Competition in Renewable Energy)", org: "UNDP Indonesia", year: 2022, level: "Nasional", category: "Competition", file: "Best Team_BPCPRE.pdf" },
-  { title: "Top 5 — ETIC 2022 (Energy Technology Innovation Competition)", org: "Kementerian ESDM RI", year: 2022, level: "Nasional", category: "Competition", file: "Top 5_ETIC.pdf" },
-  { title: "Finalist — NBPC (National Business Plan Competition)", org: "PTN / HMJ", year: 2022, level: "Nasional", category: "Competition", file: "Finalis NBPC.pdf" },
-  { title: "Finalist — LKTIN PESC 2021", org: "Himpunan Elektro UM", year: 2021, level: "Nasional", category: "Competition", file: "Finalis PESC.pdf" },
-  { title: "Finalist — UNYSEF #10 (UNY Scientific Fair)", org: "UKM Penelitian UNY", year: 2021, level: "Nasional", category: "Competition", file: "Finalis UNYSEF.pdf" },
+  { title: "Beswan Djarum — Djarum Beasiswa Plus (Batch 37)", org: "Djarum Foundation", year: 2022, level: "Nasional", category: "Competition", label: "Awardee", file: "Beswan Djarum 37.pdf" },
+  { title: "1st Place — National Poster Competition EPIC (Dies Natalis Elektro)", org: "Jurusan Teknik Elektro UNEJ", year: 2022, level: "Nasional", category: "Competition", label: "Poster Design", file: "Juara 1_EPIC.pdf" },
+  { title: "2nd Place — LIDM (Ministry of Education Certificate)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", label: "Research and Innovation", file: "Juara 2_LIDM Kementrian.pdf" },
+  { title: "Funding Recipient — KBMI (Kemendikbud Business Incubator)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", label: "Business Funding", file: "Lolos Pendanaan_KBMI.pdf" },
+  { title: "Best Team — BPCPRE (Business Plan Competition in Renewable Energy)", org: "UNDP Indonesia", year: 2022, level: "Nasional", category: "Competition", label: "Business Plan", file: "Best Team_BPCPRE.pdf" },
+  { title: "Top 5 — ETIC 2022 (Energy Technology Innovation Competition)", org: "Kementerian ESDM RI", year: 2022, level: "Nasional", category: "Competition", label: "Research and Innovation", file: "Top 5_ETIC.pdf" },
+  { title: "Finalist — NBPC (National Business Plan Competition)", org: "PTN / HMJ", year: 2022, level: "Nasional", category: "Competition", label: "Business Plan", file: "Finalis NBPC.pdf" },
+  { title: "Finalist — LKTIN PESC 2021", org: "Himpunan Elektro UM", year: 2021, level: "Nasional", category: "Competition", label: "Scientific Writing Competition", file: "Finalis PESC.pdf" },
+  { title: "Finalist — UNYSEF #10 (UNY Scientific Fair)", org: "UKM Penelitian UNY", year: 2021, level: "Nasional", category: "Competition", label: "Scientific Writing Competition", file: "Finalis UNYSEF.pdf" },
   { title: "Runner Up — LKTIN IMATETANI", org: "IMATETANI", year: 2022, level: "Nasional", category: "Competition", file: "Harapan 1 LKTIN IMATETANI.png" },
-  { title: "2nd Place — Estec III", org: "Estec", year: 2022, level: "Nasional", category: "Competition", file: "Juara 2_Estec III.png" },
-  { title: "Finalist — NUSPEST", org: "PTN / Lembaga", year: 2022, level: "Nasional", category: "Competition", file: "Finalis NUSPEST.png" },
-
-  // ── NATIONAL PROJECTS ──
-  { title: "Co-Author — Buku Karya Bersama Mahasiswa (Student Book)", org: "LP3M Universitas Jember", year: 2020, level: "Nasional", category: "Credential", file: "Buku Karya Mahasiswa_Penulis.pdf" },
-  { title: "Funding Recipient — PPMW (Entrepreneurship Development Program)", org: "Universitas Jember", year: 2022, level: "Nasional", category: "Credential", file: "PPMW.pdf" },
-  { title: "Hibah Recipient — PROMAHADESA (Program Mahasiswa Desa)", org: "Universitas Jember", year: 2022, level: "Nasional", category: "Credential", file: "PROMAHADESA.pdf" },
+  { title: "2nd Place — Estec III", org: "Estec", year: 2022, level: "Nasional", category: "Competition", label: "Scientific Writing Competition", file: "Juara 2_Estec III.png" },
+  { title: "Finalist — NUSPEST", org: "PTN / Lembaga", year: 2022, level: "Nasional", category: "Competition", label: "Scientific Writing Competition", file: "Finalis NUSPEST.png" },
 
   // ── UNIVERSITY ACHIEVEMENTS ──
-  { title: "Best Student — Faculty of Engineering 2021 (Pilmapres FT)", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Competition", file: "Pilmapres FT 2021.pdf" },
-  { title: "Best Student — Faculty of Engineering 2022 (Pilmapres FT)", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "Pilmapres FT 2022.pdf" },
-  { title: "Best Student — University of Jember (Pilmapres UNEJ)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "PILMAPRES_Juara.pdf" },
-  { title: "Campus Ambassador Favorite — Duta Kampus UNEJ", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "Duta Kampus_Favorit.pdf" },
-  { title: "1st Place — PKM Raya (Karsa Cipta Category)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "PKM Raya_1 Poster KC.pdf" },
-  { title: "Participant — PKM Raya Presentation (Karsa Cipta)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "PKM Raya_3 Presentasi KC.pdf" },
+  { title: "Mahasiswa Berprestasi — Faculty of Engineering 2021 (Pilmapres FT)", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Competition", label: "Pemilihan Mahasiswa Berprestasi", file: "Pilmapres FT 2021.pdf" },
+  { title: "Mahasiswa Berprestasi — Faculty of Engineering 2022 (Pilmapres FT)", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pemilihan Mahasiswa Berprestasi", file: "Pilmapres FT 2022.pdf" },
+  { title: "Mahasiswa Berprestasi — University of Jember (Pilmapres UNEJ)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pemilihan Mahasiswa Berprestasi", file: "PILMAPRES_Juara.pdf" },
+  { title: "Campus Ambassador Favorite — Duta Kampus UNEJ", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Campus Ambassador Competition", file: "Duta Kampus_Favorit.pdf" },
+  { title: "1st Place — PKM Raya (Karsa Cipta Category)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pekan Kreatifitas Mahasiswa", file: "PKM Raya_1 Poster KC.pdf" },
+  { title: "Participant — PKM Raya Presentation (Karsa Cipta)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pekan Kreatifitas Mahasiswa", file: "PKM Raya_3 Presentasi KC.pdf" },
   { title: "Participant — Logo Design Competition, Electrical Engineering", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "Lomba Logo Jurusan.pdf" },
 
   // ── CERTIFICATIONS ──
@@ -83,18 +77,14 @@ const certificates = [
   { title: "Fundamental SQL Using SELECT Statement", org: "DQ Lab", year: 2021, level: "Nasional", category: "Credential", file: "DQ_SQL Fundamental.pdf" },
   { title: "Machine Learning & Deep Learning (KMMI)", org: "KMMI / Kemendikbud", year: 2022, level: "Nasional", category: "Credential", file: "KMMI_MLDL.pdf" },
   { title: "PLC (Programmable Logic Controller) Certification", org: "Lembaga Sertifikasi", year: 2022, level: "Nasional", category: "Credential", file: "Sertifikasi PLC.pdf" },
-  { title: "Laboratory Assistant — Electrical Engineering", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Credential", file: "Asisten Lab.pdf" },
-
-  // ── INTERNSHIP ──
-  { title: "Internship — PT Lentera Bumi Nusantara (DC-DC Converter Control)", org: "PT Lentera Bumi Nusantara", year: 2022, level: "Nasional", category: "Organization", file: "Kerja Praktik_LBN.pdf" },
 
   // ── ORGANIZATION ──
   { title: "Head of UKM Einstein FT UNEJ", org: "UKM Einstein FT UNEJ", year: 2022, level: "Universitas", category: "Organization", file: "UKM Einstein.pdf" },
   { title: "Staff Member — UKM Mustika UNEJ", org: "UKM Mustika UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "UKM Mustika.pdf" },
   { title: "Member — Sahabat Perpustakaan UNEJ", org: "Perpustakaan UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "Sahabat Perpustakaan.png" },
-  { title: "Chief Organizer — EGE Event", org: "EGE / UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "EGE_Ketupel.pdf" },
-  { title: "Chief Organizer — JLT Event", org: "UNEJ / HMJ", year: 2022, level: "Universitas", category: "Organization", file: "JLT_Acara.pdf" },
-  { title: "Coordinator Committee — MET Event", org: "MET / UNEJ", year: 2022, level: "Universitas", category: "Organization", file: "MET_Koordinator Commitee.jpg" },
+  { title: "Chief Organizer — Einstein Great Event", org: "UKM Einstein FT UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "EGE_Ketupel.pdf" },
+  { title: "Staff Organizer — JLT Event", org: "Himpunan Mahasiswa Elektro UNEJ", year: 2022, level: "Universitas", category: "Organization", file: "JLT_Acara.pdf" },
+  { title: "Organizing Committee Member — Millenial Entrepreneur Talks Event", org: "PPI Dunia", year: 2022, level: "Internasional", category: "Organization", file: "MET_Koordinator Commitee.jpg" },
   { title: "Participant — MTQ (Musabaqah Tilawatil Quran) 2021", org: "LPTQ / Kab. Jember", year: 2021, level: "Kabupaten", category: "Competition", file: "MTQ 2021.pdf" },
   { title: "Participant — MTQ (Musabaqah Tilawatil Quran) 2022", org: "LPTQ / Kab. Jember", year: 2022, level: "Kabupaten", category: "Competition", file: "MTQ 2022.pdf" },
 ];
@@ -106,44 +96,57 @@ const projects = [
   {
     title: "Continuous Casting Inclusion Simulation (M.Eng. Thesis)",
     description: "Numerical modeling of non-metallic inclusion evolution and distribution in continuous casting of heavy rail steel using ANSYS Fluent CFD. Research under LPDP–Tsingshan Group scholarship at USTB Beijing.",
-    tags: ["ANSYS Fluent", "CFD", "Metallurgy", "USTB"],
+    tags: ["ANSYS Fluent", "CFD", "Maxwell", "ICEM CFD"],
     icon: "simulation",
     year: "2024–Present"
   },
   {
-    title: "F-Light — Solar-Powered Street Light (PPMW & PROMAHADESA)",
-    description: "Developed an innovative solar-powered street lighting solution for rural villages. Received dual national funding: PPMW entrepreneurship grant and PROMAHADESA community program.",
+    title: "F-Light — Energy-Efficient Fishing Vessel Lamp Powered by Solar Panels",
+    description: "F-Light is a solar-powered lighting system for traditional bagan tancap fishing vessels in Muncar, Banyuwangi, designed to replace costly and polluting diesel generators with a clean, renewable alternative. This project has been selected and funded under the Program Pembinaan Mahasiswa Wirausaha (P2MW) by the Indonesian Ministry of Higher Education, Science, and Technology, recognizing its potential as a sustainable and economically viable innovation for coastal fishing communities.",
     tags: ["Renewable Energy", "Solar", "Entrepreneurship"],
     icon: "energy",
-    year: "2022"
+    year: "2022",
+    file: "PPMW.pdf"
   },
   {
-    title: "Scopus Q2 Journal Publication",
-    description: "Undergraduate thesis published in the International Journal of Power Electronics and Drive Systems (2023), indexed in Scopus Q2. Research on closed-loop DC-DC converter control for renewable energy applications.",
-    tags: ["Research", "Scopus Q2", "Power Electronics"],
+    title: "PROMAHADESA — Renewable Energy Teaching Kit for SDN Ajung 01 Kalisat",
+    description: "Led a community service team under Universitas Jember's Program Mahasiswa Berdesa (PROMAHADESA) to design and develop hands-on renewable energy teaching aids for SDN Ajung 01 Kalisat, supporting K-13 thematic learning and improving science process skills among elementary school students.",
+    tags: ["Community Development", "Renewable Energy", "Education"],
+    icon: "energy",
+    year: "2022",
+    file: "PROMAHADESA.pdf"
+  },
+  {
+    title: "Scopus Q3 Journal Publication",
+    description: "Undergraduate thesis published in the International Journal of Power Electronics and Drive Systems (2023), indexed in Scopus Q3. Research on closed-loop DC-DC converter control for renewable energy applications.",
+    tags: ["Research", "Scopus Q3", "Power Electronics"],
     icon: "research",
-    year: "2023"
+    year: "2023",
+    file: "IJEPEDS.pdf"
   },
   {
-    title: "KBMI Funded Business Plan — Renewable Energy",
-    description: "Led a team that secured national funding from Kemendikbud's KBMI (Business Incubator) program. Developed a commercially viable business plan in the renewable energy sector.",
-    tags: ["Business Plan", "Renewable Energy", "Kemendikbud"],
+    title: "KBMI Funded Business Plan — Barokah Sari Herbal",
+    description: "Led a team that secured national funding from Kemendikbud's KBMI (Business Incubator) program. Kegiatan Berwirausaha Mahasiswa Indonesia (KBMI) 2021, competing among 2,944 proposals from 394 universities across Indonesia. Developed 'Barokah Sari Herbal', a herbal rhizome root powder beverage crafted to strengthen the immune system as a natural solution during the COVID-19 pandemic.",
+    tags: ["Entrepreneurship", "Traditional Drink", "Rhyzome root"],
     icon: "business",
-    year: "2021"
+    year: "2021",
+    file: "Lolos Pendanaan_KBMI.pdf"
   },
   {
-    title: "LIDM 2nd Place — Innovation Project",
-    description: "Achieved 2nd place at the national LIDM (Liga Inovasi dan Dedikasi Mahasiswa) competition with a certificate from the Ministry of Education and Culture.",
-    tags: ["Innovation", "National Competition"],
+    title: "LIDM 2021 — SERVERKITA: Modified Set-Top Box Mini Server for E-Learning",
+    description: "Achieved 2nd place at the national LIDM (Lomba Inovasi Digital Mahasiswa). Developed SERVERKITA, an innovative mini server built from a modified set-top box designed to run a Moodle-based e-learning management system. Offers an affordable and reliable alternative to conventional server hardware, significantly reducing infrastructure costs for educational institutions implementing digital learning systems.",
+    tags: ["Innovation", "Digital", "E-learning"],
     icon: "award",
-    year: "2021"
+    year: "2021",
+    file: "Juara 2_LIDM Kementrian.pdf"
   },
   {
-    title: "AI & Data Science Learning Path",
-    description: "Completed comprehensive AI and data science training: Python, Machine Learning, Microsoft Azure AI (Gen AI), Microsoft Fabric Data Science, and Prompt Engineering for developers.",
-    tags: ["Python", "Azure AI", "Machine Learning", "Dicoding"],
-    icon: "ai",
-    year: "2026"
+    title: "Co-Author — Buku Karya Bersama Mahasiswa (Student Book)",
+    description: "Contributing author in a collaborative academic book published under LP3M Universitas Jember, with the tittle Teknologi penyimpanan energi dan perkembangannya.",
+    tags: ["Publication", "Author", "Book"],
+    icon: "research",
+    year: "2020",
+    file: "Buku Karya Mahasiswa_Penulis.pdf"
   },
 ];
 
@@ -182,7 +185,7 @@ function renderCertificates(filter = 'all') {
         <span class="cert-level ${getLevelClass(cert.level)}">${cert.level}</span>
       </div>
       <div class="cert-meta">${cert.org}</div>
-      <div class="cert-year">${cert.year} · ${cert.category}</div>
+      <div class="cert-year">${cert.year} · ${cert.label || cert.category}</div>
       ${cert.file ? `
       <button class="cert-view-btn" onclick="openModal('${cert.file.replace(/'/g, "\\'")}', '${cert.title.replace(/'/g, "\\'")}')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -212,6 +215,13 @@ function renderProjects() {
         <div class="project-tags">
           ${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
         </div>
+        ${p.file ? `
+        <button class="cert-view-btn" onclick="openModal('${p.file.replace(/'/g, "\\'")}', '${p.title.replace(/'/g, "\\'")}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          View Credential
+        </button>` : ''}
       </div>
     </div>
   `).join('');
