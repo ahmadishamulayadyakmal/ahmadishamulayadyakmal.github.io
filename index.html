@@ -35,6 +35,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#education">Education</a></li>
+        <li><a href="#research">Research</a></li>
         <li><a href="#certificates">Certificates</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -47,31 +48,38 @@
        To update: name, tagline, subtitle, and CTA buttons below
   ============================================================ -->
   <section id="home" class="hero">
+    <!-- Animated "molten flow" background — drawn by initHeroFlow() in main.js -->
+    <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-container">
-      <div class="hero-text reveal">
-        <span class="hero-greeting">Hello, I'm</span>
-        <h1 class="hero-name">Ahmad Ishamul<br />Ayady Akmal, S.T.</h1>
-        <p class="hero-tagline">Metallurgical Engineer &amp; LPDP Scholar</p>
-        <p class="hero-subtitle">
+      <div class="hero-text">
+        <span class="hero-greeting hero-anim" style="--d:0">Hello, I'm</span>
+        <h1 class="hero-name hero-anim" style="--d:1">Ahmad Ishamul<br />Ayady Akmal, S.T.</h1>
+        <!-- Rotating roles: edit the `roles` array in main.js -->
+        <p class="hero-tagline hero-anim" style="--d:2"><span id="typed">Metallurgical Engineer</span><span class="caret" aria-hidden="true"></span></p>
+        <p class="hero-subtitle hero-anim" style="--d:3">
           M.Eng. candidate at <strong>University of Science and Technology Beijing</strong>,
           specializing in continuous casting simulation, inclusion analysis, and process engineering.
         </p>
-        <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">Get In Touch</a>
-          <a href="assets/images/certificates/CV_Ahmad_Ishamul_ATS.pdf" target="_blank" class="btn btn-outline">Download CV</a>
+        <div class="hero-cta hero-anim" style="--d:4">
+          <a href="#contact" class="btn btn-primary magnetic">Get In Touch</a>
+          <a href="assets/images/certificates/CV_Ahmad_Ishamul_ATS.pdf" target="_blank" class="btn btn-outline magnetic">Download CV</a>
         </div>
-        <div class="hero-badges">
+        <div class="hero-badges hero-anim" style="--d:5">
           <span class="badge">LPDP–Tsingshan Scholar</span>
           <span class="badge">Djarum Beasiswa Plus</span>
           <span class="badge">ANSYS CFD</span>
         </div>
       </div>
-      <div class="hero-image reveal reveal-right">
-        <div class="profile-wrapper">
+      <div class="hero-image hero-anim" style="--d:2">
+        <div class="profile-wrapper" id="profileWrapper">
+          <div class="profile-glow"></div>
           <img src="assets/images/profile.jpg" alt="Ahmad Ishamul Ayady Akmal" class="profile-photo">
           <div class="profile-ring"></div>
-          <div class="profile-dot dot-1"></div>
-          <div class="profile-dot dot-2"></div>
+          <div class="profile-orbit"><span></span></div>
+          <!-- Floating element tiles: the key elements of stainless steel -->
+          <div class="element-tile tile-fe" data-depth="22"><div class="el-inner"><span class="el-num">26</span><span class="el-sym">Fe</span><span class="el-name">Iron</span></div></div>
+          <div class="element-tile tile-ni" data-depth="34"><div class="el-inner"><span class="el-num">28</span><span class="el-sym">Ni</span><span class="el-name">Nickel</span></div></div>
+          <div class="element-tile tile-cr" data-depth="14"><div class="el-inner"><span class="el-num">24</span><span class="el-sym">Cr</span><span class="el-name">Chromium</span></div></div>
         </div>
       </div>
     </div>
@@ -120,19 +128,19 @@
         <div class="about-stats reveal reveal-right">
           <!-- To update stats: change the numbers and labels -->
           <div class="stat-card">
-            <span class="stat-number">63+</span>
+            <span class="stat-number" data-count="63" data-suffix="+">63+</span>
             <span class="stat-label">Certificates &amp; Awards</span>
           </div>
           <div class="stat-card">
-            <span class="stat-number">5+</span>
+            <span class="stat-number" data-count="5" data-suffix="+">5+</span>
             <span class="stat-label">Leadership and Teamwork Experience</span>
           </div>
           <div class="stat-card">
-            <span class="stat-number">5+</span>
+            <span class="stat-number" data-count="5" data-suffix="+">5+</span>
             <span class="stat-label">Machine Learning and AI Certificate</span>
           </div>
           <div class="stat-card">
-            <span class="stat-number">7</span>
+            <span class="stat-number" data-count="7">7</span>
             <span class="stat-label">Project Collaboration</span>
           </div>
         </div>
@@ -346,6 +354,141 @@
   </section>
 
   <!-- ============================================================
+       RESEARCH SECTION — interactive continuous casting diagram
+       To update texts: edit the `castStages` object in main.js
+  ============================================================ -->
+  <section id="research" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Research Focus</span>
+        <h2>Inside Continuous Casting</h2>
+        <p class="section-desc">An interactive look at the process I model in my M.Eng. thesis at USTB. Follow the inclusions from ladle to strand.</p>
+      </div>
+
+      <div class="cast-layout">
+        <div class="cast-visual reveal">
+          <svg id="castSvg" class="cast-svg" viewBox="0 0 800 440" role="img" aria-labelledby="castSvgTitle castSvgDesc">
+            <title id="castSvgTitle">Continuous casting process diagram</title>
+            <desc id="castSvgDesc">Molten steel flows from the ladle into the tundish, through the submerged entry nozzle into the mold, and solidifies along a curved strand. Small dots represent non-metallic inclusions.</desc>
+            <defs>
+              <linearGradient id="gMolten" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdba74"/><stop offset=".45" stop-color="#f97316"/><stop offset="1" stop-color="#c2410c"/></linearGradient>
+              <linearGradient id="gShell" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#334155"/><stop offset=".5" stop-color="#64748b"/><stop offset="1" stop-color="#334155"/></linearGradient>
+              <linearGradient id="gStrand" gradientUnits="userSpaceOnUse" x1="300" y1="0" x2="780" y2="0"><stop offset="0" stop-color="#f97316"/><stop offset=".45" stop-color="#b45309"/><stop offset="1" stop-color="#57534e"/></linearGradient>
+              <linearGradient id="gCore" gradientUnits="userSpaceOnUse" x1="300" y1="0" x2="640" y2="0"><stop offset="0" stop-color="#fed7aa"/><stop offset=".6" stop-color="#fb923c" stop-opacity=".7"/><stop offset="1" stop-color="#fb923c" stop-opacity="0"/></linearGradient>
+              <linearGradient id="gCopper" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a5b2e"/><stop offset=".5" stop-color="#d08a50"/><stop offset="1" stop-color="#9a5b2e"/></linearGradient>
+            </defs>
+
+            <!-- Stage 1: Ladle -->
+            <g class="stage" data-stage="ladle">
+              <path d="M58 18 H202 L187 106 H73 Z" fill="url(#gShell)" stroke="#1e293b" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M70 32 H190 L177 97 H83 Z" fill="url(#gMolten)"/>
+              <path class="flowline" d="M92 52 Q130 72 168 52"/>
+              <path class="flowline" d="M98 76 Q130 92 162 76"/>
+              <rect x="122" y="104" width="16" height="8" rx="2" fill="#1e293b"/>
+              <rect x="126" y="112" width="8" height="42" fill="#475569"/>
+              <rect class="stream" x="128" y="112" width="4" height="42" fill="url(#gMolten)"/>
+            </g>
+
+            <!-- Stage 2: Tundish -->
+            <g class="stage" data-stage="tundish">
+              <path d="M48 134 H372 L357 206 H63 Z" fill="url(#gShell)" stroke="#1e293b" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M60 145 H360 L348 198 H72 Z" fill="url(#gMolten)"/>
+              <rect x="60" y="145" width="300" height="6" fill="#facc15" opacity=".6"/>
+              <path class="flowline" d="M140 176 C 190 196, 240 160, 290 183"/>
+              <path class="flowline" d="M150 190 C 200 200, 250 186, 288 193"/>
+              <rect x="296" y="96" width="8" height="84" rx="3" fill="#334155"/>
+            </g>
+
+            <!-- Stage 3: Mold + SEN -->
+            <g class="stage" data-stage="mold">
+              <rect x="278" y="232" width="44" height="60" fill="url(#gMolten)"/>
+              <rect x="278" y="232" width="44" height="3" fill="#facc15" opacity=".7"/>
+              <path class="flowline" d="M296 262 C 282 268, 282 244, 293 240"/>
+              <path class="flowline" d="M304 262 C 318 268, 318 244, 307 240"/>
+              <path class="flowline" d="M296 266 C 282 276, 284 290, 297 289"/>
+              <path class="flowline" d="M304 266 C 318 276, 316 290, 303 289"/>
+              <rect x="266" y="226" width="12" height="66" rx="2" fill="url(#gCopper)"/>
+              <rect x="322" y="226" width="12" height="66" rx="2" fill="url(#gCopper)"/>
+              <rect x="295" y="198" width="10" height="66" rx="2" fill="#475569"/>
+              <rect class="stream" x="298" y="198" width="4" height="66" fill="url(#gMolten)"/>
+            </g>
+
+            <!-- Stage 4: Strand -->
+            <g class="stage" data-stage="strand">
+              <g id="sprays"></g>
+              <path id="strandPath" d="M300 288 A110 110 0 0 0 410 398 L780 398" fill="none" stroke="url(#gStrand)" stroke-width="44"/>
+              <path d="M300 288 A110 110 0 0 0 410 398 L640 398" fill="none" stroke="url(#gCore)" stroke-width="20"/>
+              <g id="rollers"></g>
+              <g class="torch" transform="translate(712 352)">
+                <rect x="-5" y="-26" width="10" height="22" rx="2" fill="#334155"/>
+                <path class="flame" d="M0 -4 L-5 12 Q0 22 5 12 Z" fill="#60a5fa"/>
+              </g>
+            </g>
+
+            <!-- Invisible path the inclusions follow -->
+            <path id="flowPath" d="M130 112 L130 168 C 190 192, 250 160, 300 182 L300 288 A110 110 0 0 0 410 398 L780 398" fill="none" stroke="none"/>
+            <g id="inclusions"></g>
+
+            <!-- Clickable hotspots -->
+            <g class="hotspot" data-stage="ladle" transform="translate(224 46)" tabindex="0" role="button" aria-label="Ladle stage">
+              <circle class="hs-pulse" r="12"/><circle class="hs-dot" r="12"/><text class="hs-num" y="4">1</text><text class="hs-label" x="20" y="5">Ladle</text>
+            </g>
+            <g class="hotspot" data-stage="tundish" transform="translate(394 160)" tabindex="0" role="button" aria-label="Tundish stage">
+              <circle class="hs-pulse" r="12"/><circle class="hs-dot" r="12"/><text class="hs-num" y="4">2</text><text class="hs-label" x="20" y="5">Tundish</text>
+            </g>
+            <g class="hotspot" data-stage="mold" transform="translate(356 244)" tabindex="0" role="button" aria-label="Mold stage">
+              <circle class="hs-pulse" r="12"/><circle class="hs-dot" r="12"/><text class="hs-num" y="4">3</text><text class="hs-label" x="20" y="5">Mold</text>
+            </g>
+            <g class="hotspot" data-stage="strand" transform="translate(540 338)" tabindex="0" role="button" aria-label="Strand stage">
+              <circle class="hs-pulse" r="12"/><circle class="hs-dot" r="12"/><text class="hs-num" y="4">4</text><text class="hs-label" x="20" y="5">Strand</text>
+            </g>
+          </svg>
+
+          <div class="cast-controls">
+            <button class="cast-play" id="castPlay" aria-label="Pause animation">
+              <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+              <svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7z"/></svg>
+            </button>
+            <label class="cast-speed">
+              <span>Casting speed</span>
+              <input type="range" id="castSpeed" min="0.4" max="2.4" step="0.1" value="1" />
+              <output id="castSpeedOut">1.0×</output>
+            </label>
+            <div class="cast-legend" aria-hidden="true">
+              <span>≈1550 °C</span><i></i><span>≈900 °C</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cast-info reveal reveal-right">
+          <div class="cast-steps">
+            <button class="cast-step" data-stage="ladle"><b>01</b> Ladle</button>
+            <button class="cast-step" data-stage="tundish"><b>02</b> Tundish</button>
+            <button class="cast-step" data-stage="mold"><b>03</b> Mold</button>
+            <button class="cast-step" data-stage="strand"><b>04</b> Strand</button>
+          </div>
+          <div class="cast-card" id="castCard" aria-live="polite">
+            <span class="cast-card-tag" id="castTag">Stage 01</span>
+            <h3 id="castHeading">Ladle</h3>
+            <p id="castText"></p>
+            <div class="cast-progress"><span id="castProgress"></span></div>
+          </div>
+          <div class="cast-thesis">
+            <span class="cast-thesis-label">M.Eng. Thesis</span>
+            <p>Numerical Modeling on the Evolution and Distribution of Inclusions in Continuous Casting of Heavy Rail Steel</p>
+            <div class="project-tags">
+              <span class="project-tag">ANSYS Fluent</span>
+              <span class="project-tag">Fluid flow</span>
+              <span class="project-tag">Heat transfer &amp; solidification</span>
+              <span class="project-tag">Inclusion transport</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        CERTIFICATES SECTION
        To update: edit the certificates array in assets/js/main.js
        Each entry has: title, org, year, level, category, file
@@ -358,7 +501,7 @@
         <p class="section-desc">Certificates and awards across international, national, and academic levels.</p>
       </div>
 
-      <!-- Filter buttons -->
+      <!-- Filter buttons (counts are added by main.js) -->
       <div class="cert-filters reveal">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="Competition">Competition Achievement</button>
@@ -366,9 +509,18 @@
         <button class="filter-btn" data-filter="Credential">Course and Credential</button>
       </div>
 
+      <div class="cert-toolbar reveal">
+        <label class="cert-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="certSearch" placeholder="Search certificates, e.g. “Gold”, “Python”, 2022…" aria-label="Search certificates" />
+        </label>
+        <span class="cert-count" id="certCount"></span>
+      </div>
+
       <div class="cert-grid" id="certGrid">
         <!-- Populated by main.js -->
       </div>
+      <div class="cert-more" id="certMore"></div>
     </div>
   </section>
 
@@ -407,6 +559,7 @@
           <h3>Email</h3>
           <!-- UPDATE: change email address here -->
           <a href="mailto:ishamulayadyakmal@gmail.com">ishamulayadyakmal@gmail.com</a>
+          <button class="copy-btn" data-copy="ishamulayadyakmal@gmail.com">Copy email</button>
         </div>
         <div class="contact-card reveal">
           <div class="contact-icon">
@@ -447,6 +600,7 @@
           <h3>Weixin (WeChat)</h3>
           <!-- UPDATE: change Weixin ID here -->
           <span style="font-size:.82rem;color:var(--accent);font-weight:500">ishamulayady</span>
+          <button class="copy-btn" data-copy="ishamulayady">Copy ID</button>
         </div>
       </div>
     </div>
@@ -455,17 +609,28 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Ahmad Ishamul Ayady Akmal. Built with HTML, CSS &amp; JavaScript.</p>
+      <p>&copy; <span id="year">2026</span> Ahmad Ishamul Ayady Akmal. Built with HTML, CSS &amp; JavaScript.</p>
       <p class="footer-sub">Metallurgical Engineer · USTB Beijing · LPDP–Tsingshan Scholar</p>
     </div>
   </footer>
 
+  <!-- Scroll progress ("heat bar") + back to top -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <button class="to-top" id="toTop" aria-label="Back to top">
+    <svg class="to-top-ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><circle class="to-top-fill" id="toTopFill" cx="24" cy="24" r="21"/></svg>
+    <svg class="to-top-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <!-- Certificate Modal -->
   <div class="modal-overlay" id="modalOverlay">
-    <div class="modal" id="modal">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header">
         <h3 id="modalTitle">Certificate</h3>
-        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+        <div class="modal-actions">
+          <a class="modal-open" id="modalOpen" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
+          <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+        </div>
       </div>
       <div class="modal-body" id="modalBody">
         <!-- PDF or image rendered here by main.js -->

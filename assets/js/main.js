@@ -150,9 +150,69 @@ const projects = [
   },
 ];
 
+
+// ----------------------------------------------------------------
+// HERO — rotating roles (edit freely)
+// ----------------------------------------------------------------
+const roles = [
+  "Metallurgical Engineer",
+  "LPDP–Tsingshan Scholar",
+  "CFD Simulation Researcher",
+  "Process & R&D Enthusiast",
+];
+
+// ----------------------------------------------------------------
+// RESEARCH — continuous casting stage texts
+// ----------------------------------------------------------------
+const castStages = {
+  ladle: {
+    tag: "Stage 01 · Ladle",
+    title: "Ladle — Refining & Deoxidation",
+    text: "Molten steel is refined and deoxidized before casting. Deoxidation and alloying reactions create the first population of non-metallic inclusions, and reoxidation during transfer can add more.",
+  },
+  tundish: {
+    tag: "Stage 02 · Tundish",
+    title: "Tundish — Buffer & Flotation",
+    text: "The tundish distributes steel to the mold and gives inclusions time to float up into the covering slag. The flow pattern here decides how many inclusions are removed before solidification starts.",
+  },
+  mold: {
+    tag: "Stage 03 · Mold",
+    title: "Mold — Jet Flow & Entrapment",
+    text: "Steel enters through the submerged entry nozzle (SEN) as a jet that recirculates inside the copper mold. Inclusions can be captured by the solidifying shell or carried deep into the liquid pool. This is the core of my CFD thesis work.",
+  },
+  strand: {
+    tag: "Stage 04 · Strand",
+    title: "Strand — Solidification & Final Distribution",
+    text: "Spray cooling and support rolls complete solidification along the curved strand. Where inclusions end up across the section defines the cleanliness and fatigue performance of heavy rail steel.",
+  },
+};
+
 // ================================================================
-// RENDER FUNCTIONS
+// HELPERS
 // ================================================================
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const $  = (s, root = document) => root.querySelector(s);
+const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+function highlight(text, query) {
+  const safe = esc(text);
+  const q = query.trim();
+  if (!q) return safe;
+  const re = new RegExp(`(${esc(q).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'ig');
+  return safe.replace(re, '<mark>$1</mark>');
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
 
 const icons = {
   simulation: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
@@ -162,6 +222,7 @@ const icons = {
   award:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>`,
   ai:         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 9h.01M12 9h.01M17 9h.01"/></svg>`,
 };
+const eyeIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
 
 function getLevelClass(level) {
   if (level === 'Internasional') return 'level-Internasional';
@@ -172,177 +233,598 @@ function getLevelClass(level) {
   return 'level-default';
 }
 
-function renderCertificates(filter = 'all') {
-  const grid = document.getElementById('certGrid');
-  const filtered = filter === 'all'
-    ? certificates
-    : certificates.filter(c => c.category === filter);
+// ================================================================
+// CERTIFICATES — filter + search + show more
+// ================================================================
+const CERT_PREVIEW = 12;
+const certState = { filter: 'all', query: '', expanded: false };
 
-  grid.innerHTML = filtered.map(cert => `
-    <div class="cert-card reveal">
-      <div class="cert-card-header">
-        <span class="cert-title">${cert.title}</span>
-        <span class="cert-level ${getLevelClass(cert.level)}">${cert.level}</span>
-      </div>
-      <div class="cert-meta">${cert.org}</div>
-      <div class="cert-year">${cert.year} · ${cert.label || cert.category}</div>
-      ${cert.file ? `
-      <button class="cert-view-btn" onclick="openModal('${cert.file.replace(/'/g, "\\'")}', '${cert.title.replace(/'/g, "\\'")}')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-        </svg>
-        View Credential
-      </button>` : ''}
-    </div>
-  `).join('');
-
-  observeReveal();
+function filteredCerts() {
+  const q = certState.query.trim().toLowerCase();
+  return certificates.filter(c =>
+    (certState.filter === 'all' || c.category === certState.filter) &&
+    (!q || `${c.title} ${c.org} ${c.year} ${c.level} ${c.label || ''}`.toLowerCase().includes(q))
+  );
 }
 
+function renderCertificates() {
+  const grid = $('#certGrid');
+  const list = filteredCerts();
+  const searching = certState.query.trim() !== '';
+  const visible = (certState.expanded || searching) ? list : list.slice(0, CERT_PREVIEW);
+  const q = certState.query;
+
+  grid.innerHTML = visible.length ? visible.map((cert, i) => `
+    <div class="cert-card" style="--i:${Math.min(i, 14)}">
+      <div class="cert-card-header">
+        <span class="cert-title">${highlight(cert.title, q)}</span>
+        <span class="cert-level ${getLevelClass(cert.level)}">${esc(cert.level)}</span>
+      </div>
+      <div class="cert-meta">${highlight(cert.org, q)}</div>
+      <div class="cert-year">${cert.year} · ${esc(cert.label || cert.category)}</div>
+      ${cert.file ? `<button class="cert-view-btn" data-file="${esc(cert.file)}" data-title="${esc(cert.title)}">${eyeIcon} View Credential</button>` : ''}
+    </div>
+  `).join('') : `<p class="cert-empty">No certificates match “${esc(q)}”.</p>`;
+
+  $('#certCount').textContent = `Showing ${visible.length} of ${list.length}`;
+
+  const more = $('#certMore');
+  more.innerHTML = (!searching && list.length > CERT_PREVIEW)
+    ? `<button class="btn btn-outline" id="certMoreBtn">${certState.expanded ? 'Show less' : `Show all ${list.length} certificates`}</button>`
+    : '';
+}
+
+function initCertificates() {
+  // Counts on filter buttons
+  $$('.filter-btn').forEach(btn => {
+    const f = btn.dataset.filter;
+    const n = f === 'all' ? certificates.length : certificates.filter(c => c.category === f).length;
+    btn.insertAdjacentHTML('beforeend', `<span class="filter-count">${n}</span>`);
+    btn.addEventListener('click', () => {
+      $$('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      certState.filter = f;
+      certState.expanded = false;
+      renderCertificates();
+    });
+  });
+
+  let searchTimer;
+  $('#certSearch').addEventListener('input', e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { certState.query = e.target.value; renderCertificates(); }, 150);
+  });
+
+  $('#certMore').addEventListener('click', e => {
+    if (!e.target.closest('#certMoreBtn')) return;
+    certState.expanded = !certState.expanded;
+    renderCertificates();
+    if (!certState.expanded) $('#certificates').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  // Cards animate in once the grid enters the viewport
+  const grid = $('#certGrid');
+  new IntersectionObserver((entries, obs) => {
+    if (entries[0].isIntersecting) { grid.classList.add('in-view'); obs.disconnect(); }
+  }, { threshold: 0.05 }).observe(grid);
+
+  renderCertificates();
+}
+
+// ================================================================
+// PROJECTS
+// ================================================================
 function renderProjects() {
-  const grid = document.getElementById('portfolioGrid');
+  const grid = $('#portfolioGrid');
   grid.innerHTML = projects.map(p => `
     <div class="project-card reveal">
       <div class="project-header">
         <div class="project-icon">${icons[p.icon] || icons.research}</div>
+        <span class="project-year">${esc(p.year)}</span>
       </div>
       <div class="project-body">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
-          <h3>${p.title}</h3>
-          <span style="font-size:.75rem;color:rgba(255,255,255,.7);background:var(--navy);padding:2px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0">${p.year}</span>
-        </div>
-        <p>${p.description}</p>
+        <h3>${esc(p.title)}</h3>
+        <p class="project-desc">${esc(p.description)}</p>
+        <button class="read-more" hidden>Read more</button>
         <div class="project-tags">
-          ${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
+          ${p.tags.map(t => `<span class="project-tag">${esc(t)}</span>`).join('')}
         </div>
-        ${p.file ? `
-        <button class="cert-view-btn" onclick="openModal('${p.file.replace(/'/g, "\\'")}', '${p.title.replace(/'/g, "\\'")}')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-          </svg>
-          View Credential
-        </button>` : ''}
+        ${p.file ? `<div class="project-actions"><button class="cert-view-btn" data-file="${esc(p.file)}" data-title="${esc(p.title)}">${eyeIcon} View Credential</button></div>` : ''}
       </div>
     </div>
   `).join('');
-  observeReveal();
+
+  // Show "Read more" only when the description is actually clipped
+  requestAnimationFrame(() => {
+    $$('.project-card', grid).forEach(card => {
+      const desc = $('.project-desc', card);
+      const btn  = $('.read-more', card);
+      if (desc.scrollHeight > desc.clientHeight + 2) btn.hidden = false;
+      btn.addEventListener('click', () => {
+        const open = desc.classList.toggle('expanded');
+        btn.textContent = open ? 'Show less' : 'Read more';
+      });
+    });
+  });
 }
 
 // ================================================================
 // MODAL
 // ================================================================
+let lastFocus = null;
 function openModal(file, title) {
-  const overlay  = document.getElementById('modalOverlay');
-  const body     = document.getElementById('modalBody');
-  const modalTitle = document.getElementById('modalTitle');
-  const path     = `assets/images/certificates/${file}`;
-  const ext      = file.split('.').pop().toLowerCase();
+  const body = $('#modalBody');
+  const path = `assets/images/certificates/${encodeURI(file)}`;
+  const ext  = file.split('.').pop().toLowerCase();
 
-  modalTitle.textContent = title;
+  $('#modalTitle').textContent = title;
+  $('#modalOpen').href = path;
+  body.innerHTML = ext === 'pdf'
+    ? `<iframe src="${path}" title="${esc(title)}"></iframe>`
+    : `<img src="${path}" alt="${esc(title)}" />`;
 
-  if (ext === 'pdf') {
-    body.innerHTML = `<iframe src="${path}" title="${title}"></iframe>`;
-  } else {
-    body.innerHTML = `<img src="${path}" alt="${title}" />`;
-  }
-
-  overlay.classList.add('active');
+  lastFocus = document.activeElement;
+  $('#modalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
+  $('#modalClose').focus();
 }
 
 function closeModal() {
-  const overlay = document.getElementById('modalOverlay');
+  const overlay = $('#modalOverlay');
+  if (!overlay.classList.contains('active')) return;
   overlay.classList.remove('active');
-  document.getElementById('modalBody').innerHTML = '';
+  $('#modalBody').innerHTML = '';
   document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
 }
 
-document.getElementById('modalClose').addEventListener('click', closeModal);
-document.getElementById('modalOverlay').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeModal();
-});
+$('#modalClose').addEventListener('click', closeModal);
+$('#modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// One listener for every "View Credential" button and "Copy" button
+document.addEventListener('click', e => {
+  const view = e.target.closest('[data-file]');
+  if (view) { openModal(view.dataset.file, view.dataset.title); return; }
+
+  const copy = e.target.closest('[data-copy]');
+  if (copy) {
+    const text = copy.dataset.copy;
+    const done = () => showToast(`Copied: ${text}`);
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => showToast(text));
+    else showToast(text);
+  }
+});
 
 // ================================================================
 // SCROLL REVEAL
 // ================================================================
+const revealObserver = new IntersectionObserver(entries => {
+  let i = 0;
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    setTimeout(() => el.classList.add('visible'), (i++) * 80);
+    revealObserver.unobserve(el);
+  });
+}, { threshold: 0.1 });
+
 function observeReveal() {
-  const els = document.querySelectorAll('.reveal:not(.visible)');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  els.forEach(el => observer.observe(el));
+  $$('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
 }
 
 // ================================================================
-// FILTERS
+// HERO — typing roles
 // ================================================================
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderCertificates(btn.dataset.filter);
-  });
-});
-
-// ================================================================
-// NAVBAR
-// ================================================================
-const navbar   = document.getElementById('navbar');
-const navToggle = document.getElementById('navToggle');
-const navLinks  = document.getElementById('navLinks');
-
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => navLinks.classList.remove('open'));
-});
-
-// Active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY + 80;
-  sections.forEach(section => {
-    const link = document.querySelector(`.nav-links a[href="#${section.id}"]`);
-    if (!link) return;
-    if (section.offsetTop <= scrollY && section.offsetTop + section.offsetHeight > scrollY) {
-      document.querySelectorAll('.nav-links a').forEach(a => a.style.color = '');
-      link.style.color = 'var(--accent)';
+function initTyping() {
+  const el = $('#typed');
+  if (!el || reduceMotion) return;
+  let r = 0, c = roles[0].length, deleting = true;
+  const tick = () => {
+    const word = roles[r];
+    if (deleting) {
+      c--;
+      if (c <= 0) { deleting = false; r = (r + 1) % roles.length; }
+    } else {
+      c++;
+      if (c >= roles[r].length) { deleting = true; el.textContent = roles[r]; return setTimeout(tick, 2200); }
     }
-  });
-});
+    el.textContent = roles[r].slice(0, Math.max(0, c)) || '​';
+    setTimeout(tick, deleting ? 35 : 70);
+  };
+  setTimeout(tick, 2600);
+}
 
 // ================================================================
-// PROFILE IMAGE — auto-detect if profile.jpg exists
+// HERO — "molten flow" field on canvas (reacts to the cursor)
 // ================================================================
-(function() {
-  const placeholder = document.querySelector('.profile-placeholder');
-  if (!placeholder) return;
-  const img = new Image();
-  img.onload = () => {
-    placeholder.innerHTML = '';
-    const el = document.createElement('img');
-    el.src = 'assets/images/profile.jpg';
-    el.alt = 'Ahmad Ishamul Ayady Akmal';
-    placeholder.appendChild(el);
+function initHeroFlow() {
+  const canvas = $('#heroCanvas');
+  const hero = $('#home');
+  if (!canvas || reduceMotion) return;
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0, particles = [], running = false, t = 0;
+  const mouse = { x: -9999, y: -9999 };
+
+  const spawn = () => ({ x: Math.random() * w, y: Math.random() * h, life: 80 + Math.random() * 220, hot: Math.random() < 0.14 });
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.min(240, Math.floor((w * h) / 6500));
+    particles = Array.from({ length: n }, spawn);
+  }
+
+  // Smooth pseudo flow field, mostly drifting to the right
+  const angle = (x, y) =>
+    Math.sin(x * 0.0024 + t * 0.004) * 1.4 + Math.cos(y * 0.0032 - t * 0.003) * 1.1 + 0.2;
+
+  function frame() {
+    if (!running) return;
+    t++;
+    // Fade previous frame to leave soft trails (keeps the CSS gradient visible)
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.07)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.lineWidth = 1.3;
+
+    const cool = new Path2D(), hot = new Path2D();
+    for (const p of particles) {
+      const a = angle(p.x, p.y);
+      let vx = Math.cos(a) * 1.15, vy = Math.sin(a) * 1.15;
+      const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+      if (d2 < 19000) { // vortex around the cursor, like a stirring rod
+        const d = Math.sqrt(d2) || 1, f = (1 - d / 138) * 2.6;
+        vx += (-dy / d) * f + (dx / d) * f * 0.4;
+        vy += (dx / d) * f + (dy / d) * f * 0.4;
+      }
+      const path = p.hot ? hot : cool;
+      path.moveTo(p.x, p.y);
+      p.x += vx; p.y += vy; p.life--;
+      path.lineTo(p.x, p.y);
+      if (p.life < 0 || p.x < -10 || p.x > w + 10 || p.y < -10 || p.y > h + 10) Object.assign(p, spawn());
+    }
+    ctx.strokeStyle = 'rgba(30,95,191,.30)'; ctx.stroke(cool);
+    ctx.strokeStyle = 'rgba(249,115,22,.60)'; ctx.stroke(hot);
+    requestAnimationFrame(frame);
+  }
+
+  hero.addEventListener('pointermove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  });
+  hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); });
+
+  new IntersectionObserver(([entry]) => {
+    const was = running;
+    running = entry.isIntersecting && !document.hidden;
+    if (running && !was) requestAnimationFrame(frame);
+  }).observe(hero);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) running = false;
+    else if (hero.getBoundingClientRect().bottom > 0) { running = true; requestAnimationFrame(frame); }
+  });
+
+  resize();
+}
+
+// ================================================================
+// HERO — parallax on the profile + element tiles, magnetic buttons
+// ================================================================
+function initHeroParallax() {
+  if (!finePointer || reduceMotion) return;
+  const hero = $('#home');
+  const wrap = $('#profileWrapper');
+  const tiles = $$('.element-tile');
+  hero.addEventListener('pointermove', e => {
+    const nx = e.clientX / window.innerWidth - 0.5;
+    const ny = e.clientY / window.innerHeight - 0.5;
+    wrap.style.transform = `perspective(900px) rotateY(${nx * 10}deg) rotateX(${-ny * 10}deg)`;
+    tiles.forEach(t => {
+      const d = +t.dataset.depth || 20;
+      t.style.transform = `translate(${nx * d}px, ${ny * d}px)`;
+    });
+  });
+  hero.addEventListener('pointerleave', () => {
+    wrap.style.transform = '';
+    tiles.forEach(t => (t.style.transform = ''));
+  });
+
+  $$('.magnetic').forEach(btn => {
+    btn.addEventListener('pointermove', e => {
+      const r = btn.getBoundingClientRect();
+      btn.style.translate = `${(e.clientX - r.left - r.width / 2) * 0.25}px ${(e.clientY - r.top - r.height / 2) * 0.35}px`;
+    });
+    btn.addEventListener('pointerleave', () => (btn.style.translate = ''));
+  });
+}
+
+// ================================================================
+// TILT + SPOTLIGHT CARDS
+// ================================================================
+function initTilt() {
+  if (!finePointer || reduceMotion) return;
+  $$('.skill-group, .project-card, .contact-card, .stat-card').forEach(el => {
+    el.classList.add('tilt');
+    const max = el.classList.contains('stat-card') ? 10 : 6;
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      el.style.setProperty('--rx', `${((0.5 - py) * max).toFixed(2)}deg`);
+      el.style.setProperty('--ry', `${((px - 0.5) * max).toFixed(2)}deg`);
+      el.style.setProperty('--mx', `${px * 100}%`);
+      el.style.setProperty('--my', `${py * 100}%`);
+    });
+    el.addEventListener('pointerleave', () => {
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+    });
+  });
+}
+
+// ================================================================
+// STAT COUNTERS
+// ================================================================
+function initCounters() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      obs.unobserve(el);
+      const target = +el.dataset.count, suffix = el.dataset.suffix || '';
+      el.closest('.stat-card')?.classList.add('counted');
+      if (reduceMotion) return;
+      const dur = 1400, start = performance.now();
+      const step = now => {
+        const k = clamp((now - start) / dur, 0, 1);
+        const eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(target * eased) + (k === 1 ? suffix : '');
+        if (k < 1) requestAnimationFrame(step);
+      };
+      el.textContent = '0';
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.6 });
+  $$('[data-count]').forEach(el => obs.observe(el));
+}
+
+// ================================================================
+// RESEARCH — interactive continuous casting
+// ================================================================
+function initCasting() {
+  const svg = $('#castSvg');
+  if (!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => {
+    const el = document.createElementNS(NS, tag);
+    for (const k in attrs) el.setAttribute(k, attrs[k]);
+    parent.appendChild(el);
+    return el;
   };
-  img.src = 'assets/images/profile.jpg';
-})();
+
+  // Rollers and spray nozzles along the strand
+  const strand = $('#strandPath', svg);
+  const SL = strand.getTotalLength();
+  const rollers = $('#rollers', svg), sprays = $('#sprays', svg);
+  let k = 0;
+  for (let s = 18; s < SL - 30; s += 34, k++) {
+    const p = strand.getPointAtLength(s), q = strand.getPointAtLength(s + 1);
+    let nx = -(q.y - p.y), ny = q.x - p.x;
+    const n = Math.hypot(nx, ny) || 1; nx /= n; ny /= n;
+    [-1, 1].forEach(side => mk('circle', { cx: p.x + side * nx * 29, cy: p.y + side * ny * 29, r: 6, class: 'roller' }, rollers));
+    if (s < 260 && k % 2 === 0) {
+      // nozzle on the outer side of the arc, spraying toward the strand
+      const ox = p.x + nx * 44, oy = p.y + ny * 44;
+      mk('line', { x1: ox, y1: oy, x2: p.x + nx * 36, y2: p.y + ny * 36, class: 'spray', style: `animation-delay:${-k * 0.15}s` }, sprays);
+    }
+  }
+
+  // Inclusion particles travelling along the flow path
+  const flow = $('#flowPath', svg);
+  const L = flow.getTotalLength();
+  const layer = $('#inclusions', svg);
+  let speed = 1, playing = !reduceMotion, visible = false;
+
+  const halfWidth = pt => {
+    if (pt.x < 140 && pt.y < 150) return 1.5;                    // ladle shroud stream
+    if (pt.y < 197 && pt.x < 296) return 13;                     // tundish pool
+    if (pt.y < 232 && Math.abs(pt.x - 300) < 6) return 1.5;      // SEN
+    if (pt.y < 290) return 15;                                    // mold
+    return 15;                                                    // strand
+  };
+
+  const reset = (p, s = 0) => Object.assign(p, {
+    s, j: Math.random() * 2 - 1, v: 0.75 + Math.random() * 0.5,
+    floater: Math.random() < 0.38, mode: 'flow', alpha: 1, w: 1.5, x: 0, y: 0,
+  });
+  const parts = Array.from({ length: 38 }, (_, i) => {
+    const el = mk('circle', { r: (1.6 + Math.random() * 1.8).toFixed(1), class: 'incl' }, layer);
+    return reset({ el }, (i / 38) * L);
+  });
+
+  function place(p) {
+    p.el.setAttribute('cx', p.x.toFixed(1));
+    p.el.setAttribute('cy', p.y.toFixed(1));
+    p.el.setAttribute('opacity', p.alpha.toFixed(2));
+  }
+
+  function step() {
+    for (const p of parts) {
+      if (p.mode === 'float') {
+        // Rising into the tundish slag layer, then absorbed
+        p.y -= 0.45 * speed;
+        p.x += Math.sin(p.y * 0.3) * 0.2;
+        if (p.y < 152) p.alpha -= 0.04 * speed;
+        if (p.alpha <= 0) reset(p, 0);
+        place(p);
+        continue;
+      }
+      const pt = flow.getPointAtLength(p.s);
+      const ahead = flow.getPointAtLength(Math.min(L, p.s + 1));
+      let nx = -(ahead.y - pt.y), ny = ahead.x - pt.x;
+      const n = Math.hypot(nx, ny) || 1; nx /= n; ny /= n;
+      const target = halfWidth(pt);
+      p.w += (target - p.w) * 0.12;
+      p.x = pt.x + nx * p.j * p.w;
+      p.y = pt.y + ny * p.j * p.w;
+      const boost = target < 3 ? 2.4 : 1;      // faster through narrow nozzles
+      p.s += p.v * speed * boost * 1.1;
+      if (p.floater && pt.x > 175 && pt.x < 265 && pt.y < 200 && Math.random() < 0.03) p.mode = 'float';
+      if (p.s >= L) reset(p, 0);
+      place(p);
+    }
+  }
+
+  function loop() {
+    if (!playing || !visible) return;
+    step();
+    requestAnimationFrame(loop);
+  }
+  step(); // initial placement (also used when motion is reduced)
+
+  new IntersectionObserver(([entry]) => {
+    const was = visible && playing;
+    visible = entry.isIntersecting;
+    if (visible && playing && !was) requestAnimationFrame(loop);
+    syncCycle();
+  }, { threshold: 0.15 }).observe(svg);
+
+  // Controls
+  const playBtn = $('#castPlay');
+  const setPlaying = on => {
+    playing = on;
+    playBtn.classList.toggle('paused', !on);
+    playBtn.setAttribute('aria-label', on ? 'Pause animation' : 'Play animation');
+    svg.classList.toggle('paused', !on);
+    if (on && visible) requestAnimationFrame(loop);
+  };
+  playBtn.addEventListener('click', () => setPlaying(!playing));
+  setPlaying(playing);
+
+  const speedInput = $('#castSpeed'), speedOut = $('#castSpeedOut');
+  const applySpeed = () => {
+    speed = +speedInput.value;
+    speedOut.textContent = `${speed.toFixed(1)}×`;
+    svg.style.setProperty('--flow-dur', `${(1.6 / speed).toFixed(2)}s`);
+  };
+  speedInput.addEventListener('input', applySpeed);
+  applySpeed();
+
+  // Stage selection (buttons, hotspots, or clicking a part of the drawing)
+  const order = Object.keys(castStages);
+  const card = $('#castCard'), bar = $('#castProgress');
+  const CYCLE = 6000;
+  let current = null, autoplay = !reduceMotion, cycleTimer = null;
+  card.style.setProperty('--cycle', `${CYCLE}ms`);
+
+  function setStage(key) {
+    current = key;
+    const s = castStages[key];
+    svg.dataset.active = key;
+    $$('.cast-step').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.stage === key)));
+    $$('.hotspot', svg).forEach(h => h.classList.toggle('active', h.dataset.stage === key));
+    $('#castTag').textContent = s.tag;
+    $('#castHeading').textContent = s.title;
+    $('#castText').textContent = s.text;
+    card.classList.remove('swap'); void card.offsetWidth; card.classList.add('swap');
+    bar.classList.remove('run'); void bar.offsetWidth;
+    if (autoplay && visible) bar.classList.add('run');
+  }
+
+  function syncCycle() {
+    clearInterval(cycleTimer);
+    if (!autoplay || !visible) { bar.classList.remove('run'); return; }
+    bar.classList.remove('run'); void bar.offsetWidth; bar.classList.add('run');
+    cycleTimer = setInterval(() => setStage(order[(order.indexOf(current) + 1) % order.length]), CYCLE);
+  }
+
+  const choose = key => { autoplay = false; clearInterval(cycleTimer); setStage(key); };
+  $$('.cast-step').forEach(b => b.addEventListener('click', () => choose(b.dataset.stage)));
+  $$('[data-stage]', svg).forEach(el => {
+    el.addEventListener('click', () => choose(el.dataset.stage));
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(el.dataset.stage); }
+    });
+  });
+
+  setStage(order[0]);
+}
+
+// ================================================================
+// SCROLL: navbar, active link, progress bar, timelines, back-to-top
+// ================================================================
+function initScroll() {
+  const navbar = $('#navbar');
+  const progress = $('#scrollProgress');
+  const toTop = $('#toTop'), toTopFill = $('#toTopFill');
+  const sections = $$('section[id]');
+  const links = $$('.nav-links a');
+  const timelines = $$('.timeline');
+  const RING = 132;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? y / max : 0;
+
+    navbar.classList.toggle('scrolled', y > 20);
+    progress.style.transform = `scaleX(${ratio})`;
+    toTop.classList.toggle('show', y > 600);
+    toTopFill.style.strokeDashoffset = RING * (1 - ratio);
+
+    // Active nav link
+    const probe = y + 90;
+    let activeId = null;
+    sections.forEach(s => { if (s.offsetTop <= probe) activeId = s.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${activeId}`));
+
+    // Timeline line fills as you scroll; markers light up when passed
+    const mid = window.innerHeight * 0.6;
+    timelines.forEach(tl => {
+      const r = tl.getBoundingClientRect();
+      const pct = clamp((mid - r.top) / r.height, 0, 1);
+      tl.style.setProperty('--progress', `${pct * 100}%`);
+      $$('.timeline-item', tl).forEach(item => {
+        const mr = $('.timeline-marker', item).getBoundingClientRect();
+        item.classList.toggle('passed', mr.top < mid);
+      });
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+  // Mobile menu
+  const navToggle = $('#navToggle'), navLinks = $('#navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  links.forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+}
 
 // ================================================================
 // INIT
 // ================================================================
-renderCertificates();
+$('#year').textContent = new Date().getFullYear();
+initCertificates();
 renderProjects();
 observeReveal();
+initScroll();
+initTyping();
+initHeroFlow();
+initHeroParallax();
+initCounters();
+initCasting();
+// Tilt needs the project cards to exist, so it runs after renderProjects()
+initTilt();
