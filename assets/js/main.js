@@ -60,12 +60,12 @@ const certificates = [
   // ── CERTIFICATIONS ──
   // New entries from CV — upload the PDF with the exact `file` name below and the button will show it
   { title: "Cloud & Generative AI Fundamentals on AWS", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "Dicoding_AWS Cloud GenAI.pdf" },
-  { title: "Applied Machine Learning", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Applied Machine Learning.pdf" },
-  { title: "Building Machine Learning Systems", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Building ML Systems.pdf" },
+  { title: "Applied Machine Learning", org: "Dicoding Indonesia", year: 2022, level: "Nasional", category: "Credential", file: "Dicoding_Applied Machine Learning.pdf" },
+  { title: "Building Machine Learning Systems", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "Dicoding_Building ML Systems.pdf" },
   { title: "Deep Learning Fundamentals", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Deep Learning Fundamentals.pdf" },
-  { title: "Generative AI Fundamentals", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Generative AI Fundamentals.pdf" },
-  { title: "Data Analysis", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Data Analysis.pdf" },
-  { title: "Data Science Fundamentals", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Data Science Fundamentals.pdf" },
+  { title: "Generative AI Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "Dicoding_Generative AI Fundamentals.pdf" },
+  { title: "Data Analysis for Beginners", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "Dicoding_Data Analysis.pdf" },
+  { title: "Data Science Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "Dicoding_Data Science Fundamentals.pdf" },
   { title: "Data Science with Microsoft Fabric — Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_902_1510859_260226145240.pdf" },
   { title: "Building Gen AI Applications with Microsoft Azure", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_899_1510859_150326110907.pdf" },
   { title: "Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_708_1510859_250326114410.pdf" },
