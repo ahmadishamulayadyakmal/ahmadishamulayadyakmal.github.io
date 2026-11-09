@@ -39,7 +39,8 @@ const certificates = [
   { title: "2nd Place — LIDM (Ministry of Education Certificate)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", label: "Research and Innovation", file: "Juara 2_LIDM Kementrian.pdf" },
   { title: "Funding Recipient — KBMI (Kemendikbud Business Incubator)", org: "Kemendikbud Ristek", year: 2021, level: "Nasional", category: "Competition", label: "Business Funding", file: "Lolos Pendanaan_KBMI.pdf" },
   { title: "Best Team — BPCPRE (Business Plan Competition in Renewable Energy)", org: "UNDP Indonesia", year: 2022, level: "Nasional", category: "Competition", label: "Business Plan", file: "Best Team_BPCPRE.pdf" },
-  { title: "Top 5 — ETIC 2022 (Energy Technology Innovation Competition)", org: "Kementerian ESDM RI", year: 2022, level: "Nasional", category: "Competition", label: "Research and Innovation", file: "Top 5_ETIC.pdf" },
+  { title: "Top 5 — ETIC 2022 (Energy Transition Innovation Challenge)", org: "Nexus Energy & Kementerian ESDM RI", year: 2022, level: "Nasional", category: "Competition", label: "Research and Innovation", file: "Top 5_ETIC.pdf" },
+  { title: "Top 5 — Think Efficiency", org: "Shell & SRE (Society of Renewable Energy)", year: 2023, level: "Nasional", category: "Competition", label: "Energy Efficiency Competition", file: "Top 5_Think Efficiency.pdf" },
   { title: "Finalist — NBPC (National Business Plan Competition)", org: "PTN / HMJ", year: 2022, level: "Nasional", category: "Competition", label: "Business Plan", file: "Finalis NBPC.pdf" },
   { title: "Finalist — LKTIN PESC 2021", org: "Himpunan Elektro UM", year: 2021, level: "Nasional", category: "Competition", label: "Scientific Writing Competition", file: "Finalis PESC.pdf" },
   { title: "Finalist — UNYSEF #10 (UNY Scientific Fair)", org: "UKM Penelitian UNY", year: 2021, level: "Nasional", category: "Competition", label: "Scientific Writing Competition", file: "Finalis UNYSEF.pdf" },
@@ -50,13 +51,21 @@ const certificates = [
   // ── UNIVERSITY ACHIEVEMENTS ──
   { title: "Mahasiswa Berprestasi — Faculty of Engineering 2021 (Pilmapres FT)", org: "FT Universitas Jember", year: 2021, level: "Universitas", category: "Competition", label: "Pemilihan Mahasiswa Berprestasi", file: "Pilmapres FT 2021.pdf" },
   { title: "Mahasiswa Berprestasi — Faculty of Engineering 2022 (Pilmapres FT)", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pemilihan Mahasiswa Berprestasi", file: "Pilmapres FT 2022.pdf" },
-  { title: "Mahasiswa Berprestasi — University of Jember (Pilmapres UNEJ)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pemilihan Mahasiswa Berprestasi", file: "PILMAPRES_Juara.pdf" },
+  { title: "Rank 2 — Outstanding Student, University of Jember (Pilmapres UNEJ)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pemilihan Mahasiswa Berprestasi", file: "PILMAPRES_Juara.pdf" },
   { title: "Campus Ambassador Favorite — Duta Kampus UNEJ", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Campus Ambassador Competition", file: "Duta Kampus_Favorit.pdf" },
   { title: "1st Place — PKM Raya (Karsa Cipta Category)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pekan Kreatifitas Mahasiswa", file: "PKM Raya_1 Poster KC.pdf" },
   { title: "Participant — PKM Raya Presentation (Karsa Cipta)", org: "Universitas Jember", year: 2022, level: "Universitas", category: "Competition", label: "Pekan Kreatifitas Mahasiswa", file: "PKM Raya_3 Presentasi KC.pdf" },
   { title: "Participant — Logo Design Competition, Electrical Engineering", org: "FT Universitas Jember", year: 2022, level: "Universitas", category: "Competition", file: "Lomba Logo Jurusan.pdf" },
 
   // ── CERTIFICATIONS ──
+  // New entries from CV — upload the PDF with the exact `file` name below and the button will show it
+  { title: "Cloud & Generative AI Fundamentals on AWS", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "Dicoding_AWS Cloud GenAI.pdf" },
+  { title: "Applied Machine Learning", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Applied Machine Learning.pdf" },
+  { title: "Building Machine Learning Systems", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Building ML Systems.pdf" },
+  { title: "Deep Learning Fundamentals", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Deep Learning Fundamentals.pdf" },
+  { title: "Generative AI Fundamentals", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Generative AI Fundamentals.pdf" },
+  { title: "Data Analysis", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Data Analysis.pdf" },
+  { title: "Data Science Fundamentals", org: "Dicoding Indonesia", year: "", level: "Nasional", category: "Credential", file: "Dicoding_Data Science Fundamentals.pdf" },
   { title: "Data Science with Microsoft Fabric — Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_902_1510859_260226145240.pdf" },
   { title: "Building Gen AI Applications with Microsoft Azure", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_899_1510859_150326110907.pdf" },
   { title: "Data Processing Fundamentals", org: "Dicoding Indonesia", year: 2026, level: "Nasional", category: "Credential", file: "sertifikat_course_708_1510859_250326114410.pdf" },
@@ -76,10 +85,11 @@ const certificates = [
   { title: "R Fundamentals for Data Science", org: "DQ Lab", year: 2021, level: "Nasional", category: "Credential", file: "DQ_R Fundamental.pdf" },
   { title: "Fundamental SQL Using SELECT Statement", org: "DQ Lab", year: 2021, level: "Nasional", category: "Credential", file: "DQ_SQL Fundamental.pdf" },
   { title: "Machine Learning & Deep Learning (KMMI)", org: "KMMI / Kemendikbud", year: 2022, level: "Nasional", category: "Credential", file: "KMMI_MLDL.pdf" },
-  { title: "PLC (Programmable Logic Controller) Certification", org: "Lembaga Sertifikasi", year: 2022, level: "Nasional", category: "Credential", file: "Sertifikasi PLC.pdf" },
+  { title: "BNSP Certification — PLC-Based Electronic Equipment Operation", org: "BNSP (Badan Nasional Sertifikasi Profesi)", year: 2022, level: "Nasional", category: "Credential", file: "Sertifikasi PLC.pdf" },
 
   // ── ORGANIZATION ──
-  { title: "Head of UKM Einstein FT UNEJ", org: "UKM Einstein FT UNEJ", year: 2022, level: "Universitas", category: "Organization", file: "UKM Einstein.pdf" },
+  { title: "Chairman — UKM Einstein Research Club, FT UNEJ", org: "UKM Einstein FT UNEJ", year: 2021, level: "Universitas", category: "Organization", label: "Led 4 departments · 84% program completion · 26 awards", file: "UKM Einstein.pdf" },
+  { title: "East Java Representative — Indonesia–Korea Youth Exchange Program", org: "Kemenpora RI", year: 2023, level: "Internasional", category: "Organization", label: "Youth Exchange Program", file: "Korea Youth Exchange.pdf" },
   { title: "Staff Member — UKM Mustika UNEJ", org: "UKM Mustika UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "UKM Mustika.pdf" },
   { title: "Member — Sahabat Perpustakaan UNEJ", org: "Perpustakaan UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "Sahabat Perpustakaan.png" },
   { title: "Chief Organizer — Einstein Great Event", org: "UKM Einstein FT UNEJ", year: 2021, level: "Universitas", category: "Organization", file: "EGE_Ketupel.pdf" },
@@ -95,8 +105,8 @@ const certificates = [
 const projects = [
   {
     title: "Continuous Casting Inclusion Simulation (M.Eng. Thesis)",
-    description: "Numerical modeling of non-metallic inclusion evolution and distribution in continuous casting of heavy rail steel using ANSYS Fluent CFD. Research under LPDP–Tsingshan Group scholarship at USTB Beijing.",
-    tags: ["ANSYS Fluent", "CFD", "Maxwell", "ICEM CFD"],
+    description: "Building a multiphase CFD model that couples turbulent flow, thermal gradients and inclusion nucleation/transport to predict how non-metallic inclusions evolve and distribute in continuous casting of heavy rail steel, validated against industrial casting data from partner plants. Research under the LPDP–Tsingshan Group scholarship at USTB Beijing.",
+    tags: ["CFD", "Multiphase Flow", "Heat Transfer", "Numerical Modeling"],
     icon: "simulation",
     year: "2024–Present"
   },
@@ -117,9 +127,9 @@ const projects = [
     file: "PROMAHADESA.pdf"
   },
   {
-    title: "Scopus Q3 Journal Publication",
-    description: "Undergraduate thesis published in the International Journal of Power Electronics and Drive Systems (2023), indexed in Scopus Q3. Research on closed-loop DC-DC converter control for renewable energy applications.",
-    tags: ["Research", "Scopus Q3", "Power Electronics"],
+    title: "Scopus Q3 Journal Publication & Patent Application",
+    description: "Undergraduate thesis published in the International Journal of Power Electronics and Drive Systems (IJPEDS, Scopus Q3, 2023): “Switch mode power supply with flyback LED driver topology in public lighting systems energy supply.” A patent application has also been filed for the flyback switch-mode power supply for LED drivers.",
+    tags: ["Power Electronics", "Scopus Q3", "Patent Filed"],
     icon: "research",
     year: "2023",
     file: "IJEPEDS.pdf"
@@ -142,7 +152,7 @@ const projects = [
   },
   {
     title: "Co-Author — Buku Karya Bersama Mahasiswa (Student Book)",
-    description: "Contributing author in a collaborative academic book published under LP3M Universitas Jember, with the tittle Teknologi penyimpanan energi dan perkembangannya.",
+    description: "Co-author of a registered-copyright collaborative academic book on energy storage technology, published under LP3M Universitas Jember, titled “Teknologi Penyimpanan Energi dan Perkembangannya.”",
     tags: ["Publication", "Author", "Book"],
     icon: "research",
     year: "2020",
@@ -156,9 +166,9 @@ const projects = [
 // ----------------------------------------------------------------
 const roles = [
   "Metallurgical Engineer",
-  "LPDP–Tsingshan Scholar",
-  "CFD Simulation Researcher",
-  "Process & R&D Enthusiast",
+  "Process Modeling & Simulation",
+  "Metallurgical Data Analytics",
+  "Engineering Design",
 ];
 
 // ----------------------------------------------------------------
@@ -261,7 +271,7 @@ function renderCertificates() {
         <span class="cert-level ${getLevelClass(cert.level)}">${esc(cert.level)}</span>
       </div>
       <div class="cert-meta">${highlight(cert.org, q)}</div>
-      <div class="cert-year">${cert.year} · ${esc(cert.label || cert.category)}</div>
+      <div class="cert-year">${[cert.year, esc(cert.label || cert.category)].filter(Boolean).join(' · ')}</div>
       ${cert.file ? `<button class="cert-view-btn" data-file="${esc(cert.file)}" data-title="${esc(cert.title)}">${eyeIcon} View Credential</button>` : ''}
     </div>
   `).join('') : `<p class="cert-empty">No certificates match “${esc(q)}”.</p>`;
@@ -359,9 +369,24 @@ function openModal(file, title) {
 
   $('#modalTitle').textContent = title;
   $('#modalOpen').href = path;
-  body.innerHTML = ext === 'pdf'
-    ? `<iframe src="${path}" title="${esc(title)}"></iframe>`
-    : `<img src="${path}" alt="${esc(title)}" />`;
+  $('#modalOpen').hidden = false;
+  body.innerHTML = '<p class="modal-note">Loading…</p>';
+
+  // If the credential file hasn't been uploaded yet, show a friendly note instead of a 404
+  fetch(path, { method: 'HEAD' })
+    .then(r => r.ok)
+    .catch(() => true) // offline / file:// — just try to show it
+    .then(exists => {
+      if (!$('#modalOverlay').classList.contains('active')) return;
+      if (!exists) {
+        $('#modalOpen').hidden = true;
+        body.innerHTML = `<p class="modal-note">The credential file for this certificate will be available soon.</p>`;
+        return;
+      }
+      body.innerHTML = ext === 'pdf'
+        ? `<iframe src="${path}" title="${esc(title)}"></iframe>`
+        : `<img src="${path}" alt="${esc(title)}" />`;
+    });
 
   lastFocus = document.activeElement;
   $('#modalOverlay').classList.add('active');
@@ -817,6 +842,9 @@ function initScroll() {
 // INIT
 // ================================================================
 $('#year').textContent = new Date().getFullYear();
+// "Certificates & Awards" stat always matches the list above
+$('#statCerts').dataset.count = certificates.length;
+$('#statCerts').textContent = `${certificates.length}+`;
 initCertificates();
 renderProjects();
 observeReveal();

@@ -372,6 +372,21 @@ img { display: block; max-width: 100%; }
 .timeline-org { font-size: .85rem; color: var(--accent); font-weight: 500; margin-bottom: 4px; }
 .timeline-duration { display: block; font-size: .75rem; color: var(--text-muted); margin-bottom: 8px; }
 .timeline-card p { font-size: .875rem; color: var(--text-muted); line-height: 1.6; }
+.timeline-card p + p { margin-top: 6px; }
+.timeline-card ul { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.timeline-card p + ul { margin-top: 10px; }
+.timeline-card li {
+  font-size: .875rem; color: var(--text-muted); line-height: 1.6;
+  padding-left: 16px; position: relative;
+}
+.timeline-card li::before {
+  content: ''; position: absolute; left: 2px; top: 9px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light);
+}
+/* 7 skill cards: centre the last one on the 3-column layout */
+@media (min-width: 1025px) {
+  .skill-group:last-child:nth-child(3n+1) { grid-column: 2; }
+}
 
 /* ================================================================
    CERTIFICATES
@@ -955,6 +970,7 @@ img { display: block; max-width: 100%; }
 .modal-open { font-size: .8rem; font-weight: 600; color: var(--accent); white-space: nowrap; }
 .modal-open:hover { text-decoration: underline; }
 .modal-header h3 { padding-right: 12px; }
+.modal-note { padding: 48px 24px; text-align: center; color: var(--text-muted); font-size: .95rem; }
 
 /* ---- Responsive for new parts ---- */
 .nav-brand { white-space: nowrap; }
